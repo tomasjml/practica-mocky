@@ -31,8 +31,10 @@ public class User implements Serializable {
     private String name;
 
     @NonNull
-    @ElementCollection(targetClass = Roles.class,fetch = FetchType.EAGER)
-    List<Roles> roles;
+    @Getter
+    @Setter
+    @ElementCollection(targetClass = String.class,fetch = FetchType.EAGER)
+    List<String> roles;
 
     @NonNull
     @Getter
