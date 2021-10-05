@@ -2,10 +2,7 @@ package com.isc517.mocky.entities;
 
 import lombok.*;
 
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
@@ -18,6 +15,7 @@ public class User implements Serializable {
     @NonNull
     @Getter
     @Setter
+    @Column(name = "username", updatable = false, nullable = false)
     private String username;
 
     @NonNull
@@ -40,4 +38,9 @@ public class User implements Serializable {
     @Getter
     @Setter
     private boolean isAdministrator;
+
+
+    @Getter @Setter
+    @OneToMany(mappedBy = "user")
+    private List<MockResponse> userMocks;
 }

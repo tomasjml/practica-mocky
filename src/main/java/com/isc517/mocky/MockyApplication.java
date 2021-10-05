@@ -1,5 +1,6 @@
 package com.isc517.mocky;
 
+import com.isc517.mocky.entities.MockResponse;
 import com.isc517.mocky.entities.User;
 import com.isc517.mocky.services.UserService;
 import org.springframework.boot.CommandLineRunner;
@@ -8,6 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import java.util.Arrays;
+import java.util.List;
 
 @SpringBootApplication
 public class MockyApplication {
@@ -25,7 +27,8 @@ public class MockyApplication {
                     "admin",
                     "admin",
                     Arrays.asList("ROLE_ADMIN"),
-                    true
+                    true,
+                    Arrays.asList()
             ));
             System.out.println("Done initializing Data - ");
         };
