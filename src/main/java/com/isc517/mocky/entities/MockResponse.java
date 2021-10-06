@@ -31,15 +31,18 @@ public class MockResponse implements Serializable {
     @NonNull @Getter @Setter
     private String method;
 
+    //
     @NonNull @Getter @Setter
     private String headers;
 
     @NonNull @Getter @Setter
-    private int responseCode;
+    private int statusCode;
 
+    //
     @NonNull @Getter @Setter
     private String contentType;
 
+    //
     @NonNull @Getter @Setter
     private String body;
 
