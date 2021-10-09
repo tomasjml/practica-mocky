@@ -3,26 +3,34 @@ package com.isc517.mocky.services;
 import com.google.gson.Gson;
 import com.isc517.mocky.entities.MockResponse;
 import com.isc517.mocky.repositories.MockResponseRepository;
+import com.isc517.mocky.repositories.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.util.MultiValueMap;
 
 
+import java.time.LocalDateTime;
+import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-@Service
+@Service @RequiredArgsConstructor
 public class MockResponseService {
 
-    @Autowired
     private MockResponseRepository mockRepo;
     private static final Gson gson = new Gson();
 
 
-    public Optional<MockResponse> getMockResponse(String id){
+    public MockResponse getMockEntity(String id){
         Optional<MockResponse> response = mockRepo.findById(id);
-        return response;
+        return response.orElse(null);
+    }
+
+    public List<MockResponse> getAllMocksByUser(String username){
+        return mockRepo.findAllByUser_Username(username);
     }
 
     public ResponseEntity<String> createResponse(MockResponse mock){
@@ -37,4 +45,57 @@ public class MockResponseService {
 
         return ResponseEntity.status(status).headers(headers).body(mock.getBody());
     }
+    public MockResponse createMock(MockResponse newMock){
+        LocalDateTime creationDate = LocalDateTime.now();
+        newMock.setCreationDate(creationDate);
+        switch (newMock.getExpirationTime()){
+            case Day:
+                newMock.setExpirationDate(creationDate.plusDays(1));
+                break;
+            case Hour:
+                newMock.setExpirationDate(creationDate.plusHours(1));
+                break;
+            case Week:
+                newMock.setExpirationDate(creationDate.plusWeeks(1));
+                break;
+            case Month:
+                newMock.setExpirationDate(creationDate.plusMonths(1));
+                break;
+            default:
+                newMock.setExpirationDate(creationDate.plusYears(1));
+                break;
+        }
+
+        return mockRepo.save(newMock);
+    }
+
+    public MockResponse updateMock(MockResponse newMock){
+        return mockRepo.save(newMock);
+    }
+
+    public ResponseEntity<String> deleteMock(String id){
+        Optional<MockResponse> response = mockRepo.findById(id);
+        if(response.isPresent()){
+            mockRepo.delete(response.get());
+            return ResponseEntity.ok().body("Mock deleted");
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+
+    public ResponseEntity<String> getMockResponse(String id){
+        MockResponse response = getMockEntity(id);
+        if(response == null || isExpired(response)){
+            return ResponseEntity.status(404).build();
+        }
+        return createResponse(response);
+    }
+
+    public boolean isExpired(MockResponse mock){
+        LocalDateTime actualDate = LocalDateTime.now();
+        return actualDate.isAfter(mock.getExpirationDate());
+    }
+
+
+
 }

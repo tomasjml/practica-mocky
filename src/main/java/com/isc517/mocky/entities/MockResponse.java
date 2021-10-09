@@ -2,13 +2,13 @@ package com.isc517.mocky.entities;
 
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.ManyToAny;
+
 
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
-import java.util.UUID;
+import java.time.LocalDateTime;
+
 
 @Entity
 @Builder
@@ -56,7 +56,10 @@ public class MockResponse implements Serializable {
     private Expiration expirationTime;
 
     @NonNull @Getter @Setter
-    private Date creationDate;
+    private LocalDateTime creationDate;
+
+    @NonNull @Getter @Setter
+    private LocalDateTime expirationDate;
 
     @NonNull @Getter @Setter
     @ManyToOne
