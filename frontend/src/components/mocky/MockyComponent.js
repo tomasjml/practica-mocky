@@ -1,14 +1,17 @@
-import CardComponent from "../core/card/Card";
+import { Card } from "react-bootstrap";
 
 const MockyComponent = () => {
   return (
     <>
-      <CardComponent
-        title={"Mocky"}
-        subtitle={"Build the request you need!"}
-        text={"This test works"}
-        body={<p>Body</p>}
-      />
+      <Card style={{ width: "18rem" }}>
+        <Card.Body>
+          <Card.Title>Mocky</Card.Title>
+          <Card.Subtitle className="mb-2 text-muted">
+            Any request you need!
+          </Card.Subtitle>
+          <Card.Text>Form will be here</Card.Text>
+        </Card.Body>
+      </Card>
     </>
   );
 };
