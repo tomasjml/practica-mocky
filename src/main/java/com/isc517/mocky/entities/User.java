@@ -1,5 +1,8 @@
 package com.isc517.mocky.entities;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 
 import javax.persistence.*;
@@ -41,6 +44,7 @@ public class User implements Serializable {
 
 
     @Getter @Setter
+    @JsonIgnore
     @OneToMany(mappedBy = "user")
     private List<MockResponse> userMocks;
 }

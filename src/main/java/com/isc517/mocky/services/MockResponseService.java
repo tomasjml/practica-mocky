@@ -17,9 +17,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-@Service @RequiredArgsConstructor
+@Service
+@RequiredArgsConstructor
 public class MockResponseService {
-
+    @Autowired
     private MockResponseRepository mockRepo;
     private static final Gson gson = new Gson();
 
@@ -35,7 +36,7 @@ public class MockResponseService {
 
     public ResponseEntity<String> createResponse(MockResponse mock){
         HttpStatus status = HttpStatus.valueOf(mock.getStatusCode());
-        HttpMethod method = HttpMethod.resolve(mock.getMethod());
+        //HttpMethod method = HttpMethod.resolve(mock.getMethod());
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.valueOf(mock.getContentType()));
@@ -69,8 +70,22 @@ public class MockResponseService {
         return mockRepo.save(newMock);
     }
 
-    public MockResponse updateMock(MockResponse newMock){
-        return mockRepo.save(newMock);
+    public ResponseEntity updateMock(MockResponse newMock){
+        Optional<MockResponse> oldMock = mockRepo.findById(newMock.getId());
+        if(oldMock.isPresent()){
+            oldMock.get().setRoute(newMock.getRoute());
+            oldMock.get().setMethod(newMock.getMethod());
+            oldMock.get().setHeaders(newMock.getHeaders());
+            oldMock.get().setStatusCode(newMock.getStatusCode());
+            oldMock.get().setContentType(newMock.getContentType());
+            oldMock.get().setBody(newMock.getBody());
+            oldMock.get().setEndpointName(newMock.getEndpointName());
+            oldMock.get().setEndpointDescription(newMock.getEndpointDescription());
+            oldMock.get().setExpirationTime(newMock.getExpirationTime());
+            mockRepo.save(oldMock.get());
+            return ResponseEntity.ok().body(oldMock.get());
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Mock Not Found");
     }
 
     public ResponseEntity<String> deleteMock(String id){
@@ -79,7 +94,7 @@ public class MockResponseService {
             mockRepo.delete(response.get());
             return ResponseEntity.ok().body("Mock deleted");
         }
-        return ResponseEntity.notFound().build();
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Mock Not Found");
     }
 
 

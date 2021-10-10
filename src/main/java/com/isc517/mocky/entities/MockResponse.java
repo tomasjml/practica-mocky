@@ -1,5 +1,7 @@
 package com.isc517.mocky.entities;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -55,10 +57,10 @@ public class MockResponse implements Serializable {
     @NonNull @Getter @Setter
     private Expiration expirationTime;
 
-    @NonNull @Getter @Setter
+    @Getter @Setter
     private LocalDateTime creationDate;
 
-    @NonNull @Getter @Setter
+    @Getter @Setter
     private LocalDateTime expirationDate;
 
     @NonNull @Getter @Setter

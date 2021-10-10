@@ -43,7 +43,7 @@ public class Security extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout().permitAll()
                 .and()
-                .authorizeRequests().antMatchers("/api/**").permitAll()
+                .authorizeRequests().antMatchers("/api/**","/mock/**").permitAll()
                 .and().addFilterBefore(new JWTAuthorizationFilter(), BasicAuthenticationFilter.class);
 
     }
