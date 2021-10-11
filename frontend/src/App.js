@@ -1,13 +1,14 @@
-import './App.css';
+import "./App.css";
 import MockyContainer from "./components/mocky/MockyContainer";
+import { Container, Stack } from "react-bootstrap";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-          <MockyContainer/>
-      </header>
-    </div>
+    <Container fluid="lg">
+      <Stack className="col-md-5 mx-auto" gap={3}>
+        <MockyContainer />
+      </Stack>
+    </Container>
   );
 }
 
