@@ -11,9 +11,9 @@ import { Button, Card, Form } from "react-bootstrap";
 const MockyComponent = ({ t }) => {
   return (
     <>
-      <Card className="m-3" style={{ width: "32rem" }}>
+      <Card border="primary" className="m-3" style={{ width: "64rem" }}>
         <Card.Body>
-          <Card.Title>{t("welcome")}</Card.Title>
+          <Card.Title className="text-center">{t("designMocks")}</Card.Title>
           <Card.Subtitle className="mb-2 text-muted">
             {t("anyRequest")}
           </Card.Subtitle>

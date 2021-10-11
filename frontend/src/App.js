@@ -1,14 +1,18 @@
 import "./App.css";
 import MockyContainer from "./components/mocky/MockyContainer";
 import { Container, Stack } from "react-bootstrap";
+import NavBarContainer from "./components/NavBar/NavBarContainer";
 
 function App() {
   return (
-    <Container fluid="lg">
-      <Stack className="col-md-5 mx-auto" gap={3}>
-        <MockyContainer />
-      </Stack>
-    </Container>
+    <div className="bg-black">
+      <NavBarContainer />
+      <Container fluid="sm">
+        <Stack gap={3}>
+          <MockyContainer />
+        </Stack>
+      </Container>
+    </div>
   );
 }
 

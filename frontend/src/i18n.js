@@ -8,13 +8,19 @@ const resources = {
   en: {
     translation: {
       welcome: "Welcome to Mocky",
-      anyRequest: "Any request you need",
+      anyRequest: "Any mock you need",
+      designMocks: "Design your mock",
+      manageMocks: "Manage my mocks",
+      newMock: "New Mock",
     },
   },
   es: {
     translation: {
       welcome: "Bienvenido a Mocky",
-      anyRequest: "Cualquier petición que necesites",
+      anyRequest: "Cualquier mock que necesites",
+      designMocks: "Diseña tu mock",
+      manageMocks: "Manejar mis mocks",
+      newMock: "Nuevo Mock",
     },
   },
 };
