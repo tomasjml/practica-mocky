@@ -1,9 +1,11 @@
+import MockyComponent from "./MockyComponent";
+
 const MockyContainer = () => {
-    return (
-        <>
-            <MockyContainer/>
-        </>
-    )
-}
+  return (
+    <>
+      <MockyComponent />
+    </>
+  );
+};
 
 export default MockyContainer;
