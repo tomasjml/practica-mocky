@@ -104,7 +104,7 @@ public class MockController {
         return mockService.getMockResponse(id);
     }
 
-    @RequestMapping(value ="/response/delete"+, method = RequestMethod.DELETE)
+    @RequestMapping(value ="/response/delete", method = RequestMethod.DELETE)
     public ResponseEntity deleteRequest(HttpServletRequest request){
         String id = (String) request.getSession().getAttribute("id");
         return mockService.getMockResponse(id);
