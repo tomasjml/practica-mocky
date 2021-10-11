@@ -1,13 +1,21 @@
+// React
+import PropTypes from "prop-types";
+
+//Libraries
+// the hoc
+import { withTranslation } from "react-i18next";
+
+// Components from Bootstrap 5
 import { Card } from "react-bootstrap";
 
-const MockyComponent = () => {
+const MockyComponent = ({ t }) => {
   return (
     <>
       <Card style={{ width: "18rem" }}>
         <Card.Body>
-          <Card.Title>Mocky</Card.Title>
+          <Card.Title>{t("welcome")}</Card.Title>
           <Card.Subtitle className="mb-2 text-muted">
-            Any request you need!
+            {t("anyRequest")}
           </Card.Subtitle>
           <Card.Text>Form will be here</Card.Text>
         </Card.Body>
@@ -16,4 +24,8 @@ const MockyComponent = () => {
   );
 };
 
-export default MockyComponent;
+MockyComponent.propTypes = {
+  t: PropTypes.any,
+};
+
+export default withTranslation()(MockyComponent);
