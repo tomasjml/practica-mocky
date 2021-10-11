@@ -9,4 +9,5 @@ import java.util.UUID;
 
 public interface MockResponseRepository extends JpaRepository<MockResponse, String> {
     List<MockResponse> findAllByUser_Username(String username);
+
 }

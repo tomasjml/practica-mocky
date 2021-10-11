@@ -1,6 +1,7 @@
 package com.isc517.mocky.services;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.isc517.mocky.entities.MockResponse;
 import com.isc517.mocky.repositories.MockResponseRepository;
 import com.isc517.mocky.repositories.UserRepository;
@@ -11,11 +12,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.MultiValueMap;
 
 
+import java.lang.reflect.Type;
 import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -34,15 +33,29 @@ public class MockResponseService {
         return mockRepo.findAllByUser_Username(username);
     }
 
+    public String getMethodById(String id){
+        Optional<MockResponse> mock = mockRepo.findById(id);
+        return mock.map(MockResponse::getMethod).orElse(null);
+    }
+
+
     public ResponseEntity<String> createResponse(MockResponse mock){
         HttpStatus status = HttpStatus.valueOf(mock.getStatusCode());
-        //HttpMethod method = HttpMethod.resolve(mock.getMethod());
+        //HttpMethod method = HttpMethod.valueOf(mock.getMethod());
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.valueOf(mock.getContentType()));
+        //headers.setExpires(mock.getExpirationDate().);
 
-        MultiValueMap<String,String> headersMap = gson.fromJson(mock.getHeaders(),MultiValueMap.class);
-        headers.addAll(headersMap);
+       if(!mock.getHeaders().equals("")){
+           Type type = new TypeToken<Map<String, String>>(){}.getType();
+           Map<String, String> headersMap = gson.fromJson(mock.getHeaders(), type);
+           headersMap.forEach((k,v)->{
+               System.out.println(k + " " + v);
+               headers.add(k,v);
+           });
+       }
+        //status(status).headers(headers).body(mock.getBody());
 
         return ResponseEntity.status(status).headers(headers).body(mock.getBody());
     }
@@ -67,7 +80,9 @@ public class MockResponseService {
                 break;
         }
 
-        return mockRepo.save(newMock);
+        MockResponse mock2 = mockRepo.save(newMock);
+        mock2.setRoute("http://localhost:8082/mock/response/" + mock2.getId());
+        return mockRepo.save(mock2);
     }
 
     public ResponseEntity updateMock(MockResponse newMock){
