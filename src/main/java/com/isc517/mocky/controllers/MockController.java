@@ -50,76 +50,53 @@ public class MockController {
         return mockService.deleteMock(id);
     }
 
+
     // MOCKS REQUESTS
 
-    @RequestMapping (value = "/response/{id}", method = {RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE,
-    RequestMethod.PUT, RequestMethod.OPTIONS})
-    public ResponseEntity getMockResponse(@PathVariable("id") String id, HttpServletRequest request, HttpServletResponse response)
-            throws IOException
-    {
+    @GetMapping ("/response/{id}")
+    public ResponseEntity getRequest(@PathVariable("id") String id, HttpServletRequest request) {
 
         String method = mockService.getMethodById(id);
         if(Objects.equals(request.getMethod(), method)){
-            String url;
-            switch (method){
-                case "GET":
-                    url = "/response/get";
-                    break;
-                case "POST":
-                    url ="/response/post";
-                    break;
-                case "PUT":
-                    url ="/response/put";
-                    break;
-                case "DELETE":
-                    url ="/response/delete";
-                    break;
-                case "OPTIONS":
-                    url ="/response/options";
-                    break;
-                default:
-                    url ="/response/get";
-            }
-
-            request.getSession().setAttribute("id", id);
-            response.sendRedirect(url);
+            return mockService.getMockResponse(id);
         }
-
-
-
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Mock Not Found");
     }
 
-
-    // REDIRECCIONAMIENTOS
-    @RequestMapping(value ="/response/get", method = RequestMethod.GET)
-    public ResponseEntity getRequest(HttpServletRequest request){
-        String id = (String) request.getSession().getAttribute("id");
-        return mockService.getMockResponse(id);
+    @PostMapping("/response/{id}")
+    public ResponseEntity postRequest(@PathVariable("id") String id, HttpServletRequest request){
+        String method = mockService.getMethodById(id);
+        if(Objects.equals(request.getMethod(), method)){
+            return mockService.getMockResponse(id);
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Mock Not Found");
     }
 
-    @RequestMapping(value ="/response/post", method = RequestMethod.POST)
-    public ResponseEntity postRequest(HttpServletRequest request){
-        String id = (String) request.getSession().getAttribute("id");
-        return mockService.getMockResponse(id);
+    @DeleteMapping(value ="/response/{id}")
+    public ResponseEntity deleteRequest(@PathVariable("id") String id, HttpServletRequest request){
+        String method = mockService.getMethodById(id);
+        if(Objects.equals(request.getMethod(), method)){
+            return mockService.getMockResponse(id);
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Mock Not Found");
     }
 
-    @RequestMapping(value ="/response/delete", method = RequestMethod.DELETE)
-    public ResponseEntity deleteRequest(HttpServletRequest request){
-        String id = (String) request.getSession().getAttribute("id");
-        return mockService.getMockResponse(id);
+    @PutMapping(value ="/response/{id}")
+    public ResponseEntity putRequest(@PathVariable("id") String id, HttpServletRequest request){
+        String method = mockService.getMethodById(id);
+        if(Objects.equals(request.getMethod(), method)){
+            return mockService.getMockResponse(id);
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Mock Not Found");
     }
 
-    @RequestMapping(value ="/response/put", method = RequestMethod.PUT)
-    public ResponseEntity putRequest(HttpServletRequest request){
-        String id = (String) request.getSession().getAttribute("id");
-        return mockService.getMockResponse(id);
-    }
-
-    @RequestMapping(value ="/response/options", method = RequestMethod.OPTIONS)
-    public ResponseEntity optionsRequest(HttpServletRequest request){
-        String id = (String) request.getSession().getAttribute("id");
-        return mockService.getMockResponse(id);
+    @RequestMapping(value ="/response/{id}", method = RequestMethod.OPTIONS)
+    public ResponseEntity optionsRequest(@PathVariable("id") String id, HttpServletRequest request){
+        String method = mockService.getMethodById(id);
+        if(Objects.equals(request.getMethod(), method)){
+            return mockService.getMockResponse(id);
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Mock Not Found");
     }
 
 

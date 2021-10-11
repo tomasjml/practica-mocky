@@ -41,7 +41,6 @@ public class MockResponseService {
 
     public ResponseEntity<String> createResponse(MockResponse mock){
         HttpStatus status = HttpStatus.valueOf(mock.getStatusCode());
-        //HttpMethod method = HttpMethod.valueOf(mock.getMethod());
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.valueOf(mock.getContentType()));
