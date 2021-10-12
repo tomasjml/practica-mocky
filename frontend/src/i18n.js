@@ -12,6 +12,18 @@ const resources = {
       designMocks: "Design your mock",
       manageMocks: "Manage my mocks",
       newMock: "New Mock",
+      formHTTPStatus: "HTTP Status",
+      formHTTPStatusHelp: "We'll never share your email with anyone else.",
+      formContentType: "Response Content Type",
+      formContentTypeHelp:
+        "The Content-Type header that will be sent with the response.",
+      formCharset: "Charset",
+      formCharsetHelp: "The Charset used to encode/decode your payload.",
+      formHeaders: "HTTP Headers",
+      formHeadersHelp:
+        "Customize the HTTP headers sent in the response. Define the headers as a JSON object.",
+      formResponseBody: "HTTP Response Body",
+      formSubmit: "Generate my HTTP Response",
     },
   },
   es: {
@@ -21,6 +33,20 @@ const resources = {
       designMocks: "Diseña tu mock",
       manageMocks: "Manejar mis mocks",
       newMock: "Nuevo Mock",
+      formHTTPStatus: "Estatus HTTP",
+      formHTTPStatusHelp:
+        "Nunca compartiremos su correo electrónico con nadie más.",
+      formContentType: "Tipo de Contenido de Respuesta",
+      formContentTypeHelp:
+        "El encabezado Content-Type que se enviará con la respuesta.",
+      formCharset: "Juego de caracteres",
+      formCharsetHelp:
+        "El juego de caracteres utilizado para codificar / decodificar su carga útil.",
+      formHeaders: "Encabezados HTTP",
+      formHeadersHelp:
+        "Personalice los encabezados HTTP enviados en la respuesta. Defina los encabezados como un objeto JSON.",
+      formResponseBody: "Cuerpo de Respuesta HTTP",
+      formSubmit: "Generar mi respuesta HTTP",
     },
   },
 };
