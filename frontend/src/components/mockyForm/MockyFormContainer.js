@@ -1,9 +1,9 @@
-import MockyComponent from "./MockyFormComponent";
+import MockyFormComponent from "./MockyFormComponent";
 
 const MockyFormContainer = () => {
   return (
     <>
-      <MockyComponent />
+      <MockyFormComponent />
     </>
   );
 };

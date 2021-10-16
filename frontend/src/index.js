@@ -7,10 +7,13 @@ import "bootstrap/dist/css/bootstrap.css";
 import "popper.js/dist/popper";
 import "bootstrap/dist/js/bootstrap";
 import "./i18n";
+import { BrowserRouter as Router } from "react-router-dom";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Router>
+      <App />
+    </Router>
   </React.StrictMode>,
   document.getElementById("root")
 );
