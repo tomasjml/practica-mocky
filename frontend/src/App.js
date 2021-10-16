@@ -1,5 +1,5 @@
 import "./App.css";
-import MockyContainer from "./components/mocky/MockyContainer";
+import MockyFormContainer from "./components/mockyForm/MockyFormContainer";
 import { Stack } from "react-bootstrap";
 import NavBarContainer from "./components/NavBar/NavBarContainer";
 
@@ -8,7 +8,7 @@ function App() {
     <div>
       <NavBarContainer />
       <Stack gap={3}>
-        <MockyContainer />
+        <MockyFormContainer />
       </Stack>
     </div>
   );

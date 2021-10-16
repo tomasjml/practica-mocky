@@ -8,7 +8,7 @@ import { withTranslation } from "react-i18next";
 // Components from Bootstrap 5
 import { Button, Card, Col, Form, Row } from "react-bootstrap";
 
-const MockyComponent = ({ t }) => {
+const MockyFormComponent = ({ t }) => {
   return (
     <>
       <Card border="primary" className="m-5 p-4">
@@ -160,8 +160,8 @@ const MockyComponent = ({ t }) => {
   );
 };
 
-MockyComponent.propTypes = {
+MockyFormComponent.propTypes = {
   t: PropTypes.any,
 };
 
-export default withTranslation()(MockyComponent);
+export default withTranslation()(MockyFormComponent);
