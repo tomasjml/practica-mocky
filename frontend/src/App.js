@@ -3,6 +3,7 @@ import MockyFormContainer from "./components/mockyForm/MockyFormContainer";
 import NavBarContainer from "./components/NavBar/NavBarContainer";
 import { Redirect, Route, Switch } from "react-router-dom";
 import MockyTableContainer from "./components/mockyTable/MockyTableContainer";
+import NoMatchRoute from "./components/core/NoMatchRoute/NoMatchRoute";
 
 function App() {
   return (
@@ -17,6 +18,9 @@ function App() {
         </Route>
         <Route exact path="/table">
           <MockyTableContainer />
+        </Route>
+        <Route path="*">
+          <NoMatchRoute />
         </Route>
       </Switch>
     </div>

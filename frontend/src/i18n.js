@@ -29,6 +29,7 @@ const resources = {
       tableHeaderDate: "Date",
       tableHeaderAction: "Action",
       tableAlertStorage: "Warning: These data are stored on our service!",
+      noMatchForRoute: "No match for route",
     },
   },
   es: {
@@ -57,6 +58,7 @@ const resources = {
       tableHeaderDate: "Fecha",
       tableHeaderAction: "Acciones",
       tableAlertStorage: "Alerta: Esta data es guardada en nuestro servicio!",
+      noMatchForRoute: "No pareo para ruta",
     },
   },
 };
