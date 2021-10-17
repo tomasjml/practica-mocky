@@ -1,6 +1,5 @@
 import "./App.css";
 import MockyFormContainer from "./components/mockyForm/MockyFormContainer";
-import { Stack } from "react-bootstrap";
 import NavBarContainer from "./components/NavBar/NavBarContainer";
 import { Redirect, Route, Switch } from "react-router-dom";
 import MockyTableContainer from "./components/mockyTable/MockyTableContainer";
@@ -14,9 +13,7 @@ function App() {
           <Redirect to="/form" />
         </Route>
         <Route exact path="/form">
-          <Stack gap={3}>
-            <MockyFormContainer />
-          </Stack>
+          <MockyFormContainer />
         </Route>
         <Route exact path="/table">
           <MockyTableContainer />
