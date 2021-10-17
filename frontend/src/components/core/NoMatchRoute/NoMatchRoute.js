@@ -12,7 +12,7 @@ const NoMatchRoute = ({ t }) => {
           <div className="row">
             <div className="col">
               <div className="card-title text-center">
-                <h4>404</h4>
+                <h4 className="text-white">{t("noMatchStatus")}</h4>
               </div>
             </div>
           </div>
