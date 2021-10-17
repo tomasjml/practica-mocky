@@ -3,8 +3,11 @@ import Logo from "../../logo-dark.png";
 // the hoc
 import { withTranslation } from "react-i18next";
 import PropTypes from "prop-types";
+import { useLocation } from "react-router-dom";
 
 const NavbarComponent = ({ t }) => {
+  const location = useLocation();
+  console.log("Location: ", location);
   return (
     <Navbar className="p-3" bg="light" expand="lg">
       <Navbar.Brand href="#">
@@ -22,11 +25,18 @@ const NavbarComponent = ({ t }) => {
           <Nav.Link href="#features">{t("anyRequest")}</Nav.Link>
         </Nav>
         <Nav>
-          <Nav.Link href="#deets">
-            <Button variant="outline-secondary">{t("manageMocks")}</Button>
+          <Nav.Link href="/table">
+            <Button
+              variant="outline-secondary"
+              disabled={location.pathname === "/table"}
+            >
+              {t("manageMocks")}
+            </Button>
           </Nav.Link>
-          <Nav.Link eventKey={2} href="#memes">
-            <Button variant="primary">{t("newMock")}</Button>
+          <Nav.Link eventKey={2} href="/form">
+            <Button variant="primary" disabled={location.pathname === "/form"}>
+              {t("newMock")}
+            </Button>
           </Nav.Link>
         </Nav>
       </Navbar.Collapse>

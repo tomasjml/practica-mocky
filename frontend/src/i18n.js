@@ -24,6 +24,11 @@ const resources = {
         "Customize the HTTP headers sent in the response. Define the headers as a JSON object.",
       formResponseBody: "HTTP Response Body",
       formSubmit: "Generate my HTTP Response",
+      tableHeaderName: "Name",
+      tableHeaderDescription: "Description",
+      tableHeaderDate: "Date",
+      tableHeaderAction: "Action",
+      tableAlertStorage: "Warning: These data are stored on our service!",
     },
   },
   es: {
@@ -47,6 +52,11 @@ const resources = {
         "Personalice los encabezados HTTP enviados en la respuesta. Defina los encabezados como un objeto JSON.",
       formResponseBody: "Cuerpo de Respuesta HTTP",
       formSubmit: "Generar mi respuesta HTTP",
+      tableHeaderName: "Nombre",
+      tableHeaderDescription: "Descripción",
+      tableHeaderDate: "Fecha",
+      tableHeaderAction: "Acciones",
+      tableAlertStorage: "Alerta: Esta data es guardada en nuestro servicio!",
     },
   },
 };
