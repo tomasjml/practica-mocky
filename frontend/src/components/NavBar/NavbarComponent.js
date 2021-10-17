@@ -1,4 +1,3 @@
-import { Button, Nav, Navbar } from "react-bootstrap";
 import Logo from "../../logo-dark.png";
 // the hoc
 import { withTranslation } from "react-i18next";
@@ -8,8 +7,8 @@ import { useLocation } from "react-router-dom";
 const NavbarComponent = ({ t }) => {
   const location = useLocation();
   return (
-    <Navbar className="p-3" bg="light" expand="lg">
-      <Navbar.Brand href="#">
+    <nav className="navbar navbar-expand-lg navbar-light bg-light p-3">
+      <div className="navbar-brand" href="#">
         <img
           src={Logo}
           className="d-inline-block align-top"
@@ -17,29 +16,52 @@ const NavbarComponent = ({ t }) => {
           height="38px"
           width="150.86px"
         />
-      </Navbar.Brand>
-      <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-      <Navbar.Collapse id="responsive-navbar-nav">
-        <Nav className="me-auto">
-          <Nav.Link>{t("anyRequest")}</Nav.Link>
-        </Nav>
-        <Nav>
-          <Nav.Link href="/table">
-            <Button
-              variant="outline-secondary"
-              disabled={location.pathname === "/table"}
-            >
-              {t("manageMocks")}
-            </Button>
-          </Nav.Link>
-          <Nav.Link href="/form">
-            <Button variant="primary" disabled={location.pathname === "/form"}>
-              {t("newMock")}
-            </Button>
-          </Nav.Link>
-        </Nav>
-      </Navbar.Collapse>
-    </Navbar>
+      </div>
+      <button
+        className="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span className="navbar-toggler-icon"></span>
+      </button>
+      <div className="collapse navbar-collapse" id="responsive-navbar-nav">
+        <ul className="navbar-nav me-auto mb-lg-0">
+          <li className="nav-item">
+            <a className="nav-link active" aria-current="page" href="/table">
+              {t("anyRequest")}
+            </a>
+          </li>
+        </ul>
+        <ul className="navbar-nav">
+          <li className="nav-item me-2">
+            {location.pathname === "/form" ? (
+              <a className="btn btn-secondary" href="/table">
+                {t("manageMocks")}
+              </a>
+            ) : (
+              <button className="btn btn-secondary" disabled>
+                {t("manageMocks")}
+              </button>
+            )}
+          </li>
+          <li className="nav-item me-2">
+            {location.pathname === "/table" ? (
+              <a className="btn btn-primary" href="/form">
+                {t("newMock")}
+              </a>
+            ) : (
+              <button className="btn btn-primary" disabled>
+                {t("newMock")}
+              </button>
+            )}
+          </li>
+        </ul>
+      </div>
+    </nav>
   );
 };
 
