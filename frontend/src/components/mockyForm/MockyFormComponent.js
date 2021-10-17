@@ -6,46 +6,72 @@ import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
 
 // Components from Bootstrap 5
-import { Button, Card, Col, Form, Row } from "react-bootstrap";
+import { Button, Col, Form, Row } from "react-bootstrap";
+import { useForm } from "react-hook-form";
 
 const MockyFormComponent = ({ t }) => {
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (values) => console.log(values);
+
   return (
     <>
-      <Card border="primary" className="m-5 p-4">
-        <Card.Body>
-          <Card.Title className="text-center">{t("designMocks")}</Card.Title>
-          <Card.Subtitle className="mb-2 text-center text-muted">
-            {t("anyRequest")}
-          </Card.Subtitle>
+      <div className="card border-primary m-5 p-4">
+        <div className="card-body">
+          <div className="row">
+            <div className="col">
+              <div className="card-title text-center">
+                <h3>{t("designMocks")}</h3>
+              </div>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col">
+              <div className="card-subtitle mb-2 text-center text-muted">
+                {t("anyRequest")}
+              </div>
+            </div>
+          </div>
           <Form>
             <Row className="g-2">
               <Col md>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                   <Form.Label>{t("formHTTPStatus")}</Form.Label>
-                  <Form.Select aria-label="Default select example" required>
+                  <Form.Select
+                    defaultValue="200"
+                    itemRef={register("status", {
+                      required: "Required",
+                      pattern: {
+                        message: "Need to select one option",
+                      },
+                    })}
+                    aria-label="Default select example"
+                  >
                     <option disabled value>
                       {" "}
                       1xx Informational Response
                     </option>
-                    <option value="1">100 - Continue</option>
+                    <option value="100">100 - Continue</option>
                     <option disabled value>
                       {" "}
                       2xx Success
                     </option>
-                    <option value="2" selected>
-                      200 - Ok
-                    </option>
+                    <option value="200">200 - Ok</option>
                     <option disabled value>
                       {" "}
                       4xx Client Errors
                     </option>
-                    <option value="3">404 - Not Found</option>
+                    <option value="404">404 - Not Found</option>
                     <option disabled value>
                       {" "}
                       5xx Server Errors
                     </option>
-                    <option value="4">500 - Internal Server Error</option>
+                    <option value="500">500 - Internal Server Error</option>
                   </Form.Select>
+                  {errors.status && errors.email.message}
                   <Form.Text className="text-primary">
                     {t("formHTTPStatusHelp")}
                   </Form.Text>
@@ -134,8 +160,15 @@ const MockyFormComponent = ({ t }) => {
               </Col>
             </Row>
             <Row className="justify-content-md-center">
-              <Col xs lg="4">
-                <Button variant="primary" type="submit">
+              <Col xs lg="3">
+                <Button
+                  variant="primary"
+                  type="submit"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleSubmit(onSubmit);
+                  }}
+                >
                   {t("formSubmit")}
                 </Button>
               </Col>
@@ -154,8 +187,8 @@ const MockyFormComponent = ({ t }) => {
               </Col>
             </Row>
           </Form>
-        </Card.Body>
-      </Card>
+        </div>
+      </div>
     </>
   );
 };

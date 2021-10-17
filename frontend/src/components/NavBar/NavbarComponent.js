@@ -7,7 +7,6 @@ import { useLocation } from "react-router-dom";
 
 const NavbarComponent = ({ t }) => {
   const location = useLocation();
-  console.log("Location: ", location);
   return (
     <Navbar className="p-3" bg="light" expand="lg">
       <Navbar.Brand href="#">
@@ -22,7 +21,7 @@ const NavbarComponent = ({ t }) => {
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="me-auto">
-          <Nav.Link href="#features">{t("anyRequest")}</Nav.Link>
+          <Nav.Link>{t("anyRequest")}</Nav.Link>
         </Nav>
         <Nav>
           <Nav.Link href="/table">
@@ -33,7 +32,7 @@ const NavbarComponent = ({ t }) => {
               {t("manageMocks")}
             </Button>
           </Nav.Link>
-          <Nav.Link eventKey={2} href="/form">
+          <Nav.Link href="/form">
             <Button variant="primary" disabled={location.pathname === "/form"}>
               {t("newMock")}
             </Button>
