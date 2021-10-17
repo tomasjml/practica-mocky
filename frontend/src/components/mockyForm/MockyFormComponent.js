@@ -5,8 +5,6 @@ import PropTypes from "prop-types";
 // the hoc
 import { withTranslation } from "react-i18next";
 
-// Components from Bootstrap 5
-import { Button, Col, Form, Row } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 
 const MockyFormComponent = ({ t }) => {
@@ -35,109 +33,121 @@ const MockyFormComponent = ({ t }) => {
               </div>
             </div>
           </div>
-          <Form>
-            <Row className="g-2">
-              <Col md>
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                  <Form.Label>{t("formHTTPStatus")}</Form.Label>
-                  <Form.Select
-                    defaultValue="200"
-                    itemRef={register("status", {
-                      required: "Required",
-                      pattern: {
-                        message: "Need to select one option",
-                      },
-                    })}
+          <form>
+            <div className="row g-2">
+              <div className="col col-md-6 mb-3">
+                <label className="form-label" htmlFor="selectStatus">
+                  {t("formHTTPStatus")}
+                </label>
+                <select
+                  id="selectStatus"
+                  className="form-select"
+                  defaultValue="200"
+                  {...register("status", {
+                    required: "Required",
+                    pattern: {
+                      message: "Need to select one option",
+                    },
+                  })}
+                  aria-label="Default select example"
+                >
+                  <option disabled value>
+                    {" "}
+                    1xx Informational Response
+                  </option>
+                  <option value="100">100 - Continue</option>
+                  <option disabled value>
+                    {" "}
+                    2xx Success
+                  </option>
+                  <option value="200">200 - Ok</option>
+                  <option disabled value>
+                    {" "}
+                    4xx Client Errors
+                  </option>
+                  <option value="404">404 - Not Found</option>
+                  <option disabled value>
+                    {" "}
+                    5xx Server Errors
+                  </option>
+                  <option value="500">500 - Internal Server Error</option>
+                </select>
+                {errors.status && errors.status.message}
+                <div className="form-text text-primary">
+                  {t("formHTTPStatusHelp")}
+                </div>
+              </div>
+            </div>
+            <div className="row g-2">
+              <div className="col col-md-6">
+                <div className="mb-3">
+                  <label htmlFor="selectContentType">
+                    {t("formContentType")}
+                  </label>
+                  <select
+                    id="selectContentType"
+                    className="form-select"
                     aria-label="Default select example"
+                    required
                   >
-                    <option disabled value>
-                      {" "}
-                      1xx Informational Response
-                    </option>
-                    <option value="100">100 - Continue</option>
-                    <option disabled value>
-                      {" "}
-                      2xx Success
-                    </option>
-                    <option value="200">200 - Ok</option>
-                    <option disabled value>
-                      {" "}
-                      4xx Client Errors
-                    </option>
-                    <option value="404">404 - Not Found</option>
-                    <option disabled value>
-                      {" "}
-                      5xx Server Errors
-                    </option>
-                    <option value="500">500 - Internal Server Error</option>
-                  </Form.Select>
-                  {errors.status && errors.email.message}
-                  <Form.Text className="text-primary">
-                    {t("formHTTPStatusHelp")}
-                  </Form.Text>
-                </Form.Group>
-              </Col>
-            </Row>
-            <Row className="g-2">
-              <Col md>
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                  <Form.Label>{t("formContentType")}</Form.Label>
-                  <Form.Select aria-label="Default select example" required>
                     <option value="1">application/json</option>
                     <option value="2">text/html</option>
                     <option value="3">text/js</option>
                     <option value="4">text/css</option>
                     <option value="5">text/json</option>
                     <option value="6">text/plain</option>
-                  </Form.Select>
-                  <Form.Text className="text-primary">
+                  </select>
+                  <div className="form-text text-primary">
                     {t("formContentTypeHelp")}
-                  </Form.Text>
-                </Form.Group>
-              </Col>
-              <Col md>
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                  <Form.Label>{t("formCharset")}</Form.Label>
-                  <Form.Select aria-label="Default select example" required>
+                  </div>
+                </div>
+              </div>
+              <div className="col col-md-6">
+                <div className="mb-3">
+                  <label htmlFor="selectCharset">{t("formCharset")}</label>
+                  <select
+                    id="selectCharset"
+                    className="form-select"
+                    aria-label="Default select example"
+                    required
+                  >
                     <option value="1">UTF-8</option>
                     <option value="2">ISO-8859-1</option>
                     <option value="3">UTF-16</option>
-                  </Form.Select>
-                  <Form.Text className="text-primary">
+                  </select>
+                  <div className="form-text text-primary">
                     {t("formCharsetHelp")}
-                  </Form.Text>
-                </Form.Group>
-              </Col>
-            </Row>
-            <Row className="g-2">
-              <Col md>
-                <Form.Group
-                  className="mb-3"
-                  controlId="exampleForm.ControlTextarea1"
-                >
-                  <Form.Label>{t("formHeaders")}</Form.Label>
-                  <Form.Control
-                    as="textarea"
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="row g-2">
+              <div className="col col-md-12">
+                <div className="mb-3">
+                  <label htmlFor="textAreaHeaders">{t("formHeaders")}</label>
+                  <textarea
+                    id="textAreaHeaders"
+                    className="form-control"
                     rows={4}
                     placeholder={
                       '"{\n' + '  "X-Foo-Bar": "Hello World"\n' + '}"'
                     }
                   />
-                  <Form.Text className="text-primary">
+                  <div className="form-text text-primary">
                     {t("formHeadersHelp")}
-                  </Form.Text>
-                </Form.Group>
-              </Col>
-            </Row>
-            <Row className="g-2">
-              <Col md>
-                <Form.Group
-                  className="mb-3"
-                  controlId="exampleForm.ControlTextarea1"
-                >
-                  <Form.Label>{t("formResponseBody")}</Form.Label>
-                  <Form.Control
-                    as="textarea"
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="row g-2">
+              <div className="col col-md-12">
+                <div className="mb-3">
+                  <label htmlFor="textAreaResponseBody">
+                    {t("formResponseBody")}
+                  </label>
+                  <textarea
+                    id="textAreaResponseBody"
+                    className="form-control"
                     rows={12}
                     placeholder={
                       '"{\n' +
@@ -153,16 +163,16 @@ const MockyFormComponent = ({ t }) => {
                       '}"'
                     }
                   />
-                  <Form.Text className="text-primary">
+                  <div className="form-text text-primary">
                     {t("formHTTPStatusHelp")}
-                  </Form.Text>
-                </Form.Group>
-              </Col>
-            </Row>
-            <Row className="justify-content-md-center">
-              <Col xs lg="3">
-                <Button
-                  variant="primary"
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="row justify-content-md-center">
+              <div className="col col-lg-3 col-xl-3">
+                <button
+                  className="btn btn-primary"
                   type="submit"
                   onClick={(e) => {
                     e.preventDefault();
@@ -170,23 +180,25 @@ const MockyFormComponent = ({ t }) => {
                   }}
                 >
                   {t("formSubmit")}
-                </Button>
-              </Col>
-              <Col xs lg="3">
-                <Form.Group>
-                  <Form.Select aria-label="Default select example" required>
-                    <option value="1">Never expire</option>
-                    <option value="2">Expire in 1 year</option>
-                    <option value="3">Expire in 1 Month</option>
-                    <option value="4">Expire in 1 week</option>
-                    <option value="5">Expire in 1 day</option>
-                    <option value="6">Expire in 1 hour</option>
-                    <option value="7">Expire in 1 minute</option>
-                  </Form.Select>
-                </Form.Group>
-              </Col>
-            </Row>
-          </Form>
+                </button>
+              </div>
+              <div className="col col-lg-3 col-xl-3">
+                <select
+                  className="form-select"
+                  aria-label="Default select example"
+                  required
+                >
+                  <option value="1">Never expire</option>
+                  <option value="2">Expire in 1 year</option>
+                  <option value="3">Expire in 1 Month</option>
+                  <option value="4">Expire in 1 week</option>
+                  <option value="5">Expire in 1 day</option>
+                  <option value="6">Expire in 1 hour</option>
+                  <option value="7">Expire in 1 minute</option>
+                </select>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
     </>
