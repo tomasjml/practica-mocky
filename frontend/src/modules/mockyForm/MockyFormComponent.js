@@ -33,7 +33,7 @@ const MockyFormComponent = ({ t }) => {
               </div>
             </div>
           </div>
-          <form>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <div className="row g-2">
               <div className="col col-md-6 mb-3">
                 <label className="form-label" htmlFor="selectStatus">
@@ -44,10 +44,8 @@ const MockyFormComponent = ({ t }) => {
                   className="form-select"
                   defaultValue="200"
                   {...register("status", {
-                    required: "Required",
-                    pattern: {
-                      message: "Need to select one option",
-                    },
+                    required: true,
+                    valueAsNumber: true,
                   })}
                   aria-label="Default select example"
                 >
@@ -88,14 +86,16 @@ const MockyFormComponent = ({ t }) => {
                     id="selectContentType"
                     className="form-select"
                     aria-label="Default select example"
-                    required
+                    {...register("contentType", {
+                      required: true,
+                    })}
                   >
-                    <option value="1">application/json</option>
-                    <option value="2">text/html</option>
-                    <option value="3">text/js</option>
-                    <option value="4">text/css</option>
-                    <option value="5">text/json</option>
-                    <option value="6">text/plain</option>
+                    <option value="application/json">application/json</option>
+                    <option value="text/html">text/html</option>
+                    <option value="text/js">text/js</option>
+                    <option value="text/css">text/css</option>
+                    <option value="text/json">text/json</option>
+                    <option value="text/plain">text/plain</option>
                   </select>
                   <div className="form-text text-primary">
                     {t("formContentTypeHelp")}
@@ -109,11 +109,13 @@ const MockyFormComponent = ({ t }) => {
                     id="selectCharset"
                     className="form-select"
                     aria-label="Default select example"
-                    required
+                    {...register("charset", {
+                      required: true,
+                    })}
                   >
-                    <option value="1">UTF-8</option>
-                    <option value="2">ISO-8859-1</option>
-                    <option value="3">UTF-16</option>
+                    <option value="UTF-8">UTF-8</option>
+                    <option value="ISO-8859-1">ISO-8859-1</option>
+                    <option value="UTF-16">UTF-16</option>
                   </select>
                   <div className="form-text text-primary">
                     {t("formCharsetHelp")}
@@ -132,6 +134,9 @@ const MockyFormComponent = ({ t }) => {
                     placeholder={
                       '"{\n' + '  "X-Foo-Bar": "Hello World"\n' + '}"'
                     }
+                    {...register("headers", {
+                      required: true,
+                    })}
                   />
                   <div className="form-text text-primary">
                     {t("formHeadersHelp")}
@@ -162,6 +167,9 @@ const MockyFormComponent = ({ t }) => {
                       "  }\n" +
                       '}"'
                     }
+                    {...register("responseBody", {
+                      required: true,
+                    })}
                   />
                   <div className="form-text text-primary">
                     {t("formHTTPStatusHelp")}
@@ -171,14 +179,7 @@ const MockyFormComponent = ({ t }) => {
             </div>
             <div className="row justify-content-md-center">
               <div className="col col-lg-3 col-xl-3">
-                <button
-                  className="btn btn-primary"
-                  type="submit"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleSubmit(onSubmit);
-                  }}
-                >
+                <button className="btn btn-primary" type="submit">
                   {t("formSubmit")}
                 </button>
               </div>
@@ -186,7 +187,9 @@ const MockyFormComponent = ({ t }) => {
                 <select
                   className="form-select"
                   aria-label="Default select example"
-                  required
+                  {...register("time", {
+                    required: true,
+                  })}
                 >
                   <option value="1">Never expire</option>
                   <option value="2">Expire in 1 year</option>

@@ -1,9 +1,9 @@
 import "./App.css";
-import MockyFormContainer from "./components/mockyForm/MockyFormContainer";
-import NavBarContainer from "./components/NavBar/NavBarContainer";
+import MockyFormContainer from "./modules/mockyForm/MockyFormContainer";
+import NavBarContainer from "./modules/NavBar/NavBarContainer";
 import { Redirect, Route, Switch } from "react-router-dom";
-import MockyTableContainer from "./components/mockyTable/MockyTableContainer";
-import NoMatchRoute from "./components/core/NoMatchRoute/NoMatchRoute";
+import MockyTableContainer from "./modules/mockyTable/MockyTableContainer";
+import NoMatchRoute from "./modules/core/NoMatchRoute/NoMatchRoute";
 
 function App() {
   return (
