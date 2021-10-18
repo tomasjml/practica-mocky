@@ -1,6 +1,8 @@
 import React from "react";
 import { withTranslation } from "react-i18next";
 import PropTypes from "prop-types";
+import { appConfig } from "../config/global";
+import ModalButton from "../core/components/ModalButton/ModalButton";
 
 const MockyTableComponent = ({ t, mockies }) => {
 	return (
@@ -58,11 +60,25 @@ const MockyTableComponent = ({ t, mockies }) => {
 												<td>
 													<span>
 														{" "}
-														<i className="text-primary bi-box-arrow-up-right" />
+														<a href={`${appConfig.apiHost}/mock/${mocky.id}`} target="_blank" rel="noreferrer">
+															<i className="text-primary bi-box-arrow-up-right" />
+														</a>
 													</span>
 													<span>
 														{" "}
-														<i className="text-danger bi-trash-fill" />
+														<ModalButton
+															idForModal={mocky.id}
+															contentButton={<i className="text-danger bi-trash-fill" />}
+															classesButton={"btn"}
+															classesCloseButton={"btn btn-secondary"}
+															classesActionButton={"btn btn-danger"}
+															styleButton={{ backgroundColor: "transparent" }}
+															textModalTitle={"Are you sure you want to eliminate the endpoint?"}
+															textModalBody={`Endpoint to be eliminated: ${mocky.id}`}
+															textCloseButton={"Close"}
+															textSaveButton={"Delete"}
+															onSave={() => console.log("Deleted: ", mocky.id)}
+														/>
 													</span>
 												</td>
 											</tr>
