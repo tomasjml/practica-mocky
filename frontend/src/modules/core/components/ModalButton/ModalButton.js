@@ -12,18 +12,13 @@ const ModalButton = ({
 	textModalTitle,
 	textModalBody,
 	textCloseButton,
-	textSaveButton,
+	textActionButton,
 	onSave
 }) => {
 	const [modal, setModal] = useState({});
 
 	useEffect(() => {
 		setModal(new Modal(document.querySelector(`#modalForButton${idForModal}`), {}));
-		// if (show) {
-		// 	modal.show();
-		// } else {
-		// 	modal.hide();
-		//}
 	}, []);
 
 	return (
@@ -60,7 +55,7 @@ const ModalButton = ({
 									modal.hide();
 								}}
 							>
-								{textSaveButton}
+								{textActionButton}
 							</button>
 						</div>
 					</div>
@@ -80,7 +75,7 @@ ModalButton.propTypes = {
 	textModalTitle: PropTypes.string,
 	textModalBody: PropTypes.string,
 	textCloseButton: PropTypes.string,
-	textSaveButton: PropTypes.string,
+	textActionButton: PropTypes.string,
 	onSave: PropTypes.func
 };
 

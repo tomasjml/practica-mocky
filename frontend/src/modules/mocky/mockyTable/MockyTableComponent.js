@@ -1,8 +1,9 @@
 import React from "react";
 import { withTranslation } from "react-i18next";
 import PropTypes from "prop-types";
-import { appConfig } from "../config/global";
-import ModalButton from "../core/components/ModalButton/ModalButton";
+// Route for mocks `${appConfig.apiHost}/mock/${mocky.id}`
+// import { appConfig } from "../config/global";
+import ModalButton from "../../core/components/ModalButton/ModalButton";
 
 const MockyTableComponent = ({ t, mockies }) => {
 	return (
@@ -60,7 +61,7 @@ const MockyTableComponent = ({ t, mockies }) => {
 												<td>
 													<span>
 														{" "}
-														<a href={`${appConfig.apiHost}/mock/${mocky.id}`} target="_blank" rel="noreferrer">
+														<a href={mocky.route} target="_blank" rel="noreferrer">
 															<i className="text-primary bi-box-arrow-up-right" />
 														</a>
 													</span>
@@ -73,10 +74,10 @@ const MockyTableComponent = ({ t, mockies }) => {
 															classesCloseButton={"btn btn-secondary"}
 															classesActionButton={"btn btn-danger"}
 															styleButton={{ backgroundColor: "transparent" }}
-															textModalTitle={"Are you sure you want to eliminate the endpoint?"}
-															textModalBody={`Endpoint to be eliminated: ${mocky.id}`}
-															textCloseButton={"Close"}
-															textSaveButton={"Delete"}
+															textModalTitle={t("tableDeleteModalTitle")}
+															textModalBody={`${t("tableDeleteModalBody")} ${mocky.id}`}
+															textCloseButton={t("tableDeleteModalClose")}
+															textActionButton={t("tableDeleteModalAction")}
 															onSave={() => console.log("Deleted: ", mocky.id)}
 														/>
 													</span>

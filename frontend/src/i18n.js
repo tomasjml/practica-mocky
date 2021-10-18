@@ -29,6 +29,10 @@ const resources = {
 			tableHeaderAction: "Action",
 			tableAlertStorage: "Warning: These data are stored on our service!",
 			tableNoContent: "NO CONTENT",
+			tableDeleteModalTitle: "Are you sure you want to eliminate the endpoint?",
+			tableDeleteModalBody: "Endpoint to be eliminated:",
+			tableDeleteModalClose: "Close",
+			tableDeleteModalAction: "Delete",
 			noMatchStatus: "Error: 404 Not Found",
 			noMatchForRoute: "No match for route"
 		}
@@ -58,6 +62,10 @@ const resources = {
 			tableHeaderAction: "Acciones",
 			tableAlertStorage: "Alerta: Esta data es guardada en nuestro servicio!",
 			tableNoContent: "NO CONTENIDO",
+			tableDeleteModalTitle: "¿Estás segur@ de que quieres eliminar el punto final?",
+			tableDeleteModalBody: "Endpoint a eliminar: ",
+			tableDeleteModalClose: "Cerrar",
+			tableDeleteModalAction: "Borrar",
 			noMatchStatus: "Error: 404 No Encontrada",
 			noMatchForRoute: "No pareo para ruta"
 		}

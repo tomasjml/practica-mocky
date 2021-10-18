@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import MockyTableComponent from "./MockyTableComponent";
-import { fetchMockies } from "./service";
+import { fetchMockies } from "../service";
 
 const MockyTableContainer = () => {
 	const [mockies, setMockies] = useState([]);
