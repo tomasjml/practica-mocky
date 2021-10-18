@@ -28,6 +28,7 @@ const resources = {
 			tableHeaderDate: "Date",
 			tableHeaderAction: "Action",
 			tableAlertStorage: "Warning: These data are stored on our service!",
+			tableNoContent: "NO CONTENT",
 			noMatchStatus: "Error: 404 Not Found",
 			noMatchForRoute: "No match for route"
 		}
@@ -56,6 +57,7 @@ const resources = {
 			tableHeaderDate: "Fecha",
 			tableHeaderAction: "Acciones",
 			tableAlertStorage: "Alerta: Esta data es guardada en nuestro servicio!",
+			tableNoContent: "NO CONTENIDO",
 			noMatchStatus: "Error: 404 No Encontrada",
 			noMatchForRoute: "No pareo para ruta"
 		}

@@ -39,7 +39,7 @@ const MockyTableComponent = ({ t, mockies }) => {
 													&nbsp;<span className="badge bg-warning">{mocky.charset}</span>
 													<br />
 													{mocky.content === "" ? (
-														<span className="badge text-black">NO CONTENT</span>
+														<span className="badge text-black">{t("tableNoContent")}</span>
 													) : (
 														<pre>
 															<code className="d-inline-block">{mocky.content}</code>
