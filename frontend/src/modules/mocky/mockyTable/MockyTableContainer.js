@@ -6,11 +6,9 @@ const MockyTableContainer = () => {
 	const [mockies, setMockies] = useState([]);
 
 	const fetchData = () => {
-		fetchMockies("admin")
-			.then(data => {
-				setMockies(data);
-			})
-			.then(() => console.log(mockies));
+		fetchMockies("admin").then(data => {
+			setMockies(data);
+		});
 	};
 
 	useEffect(() => {
@@ -18,8 +16,7 @@ const MockyTableContainer = () => {
 	}, []);
 
 	const onDelete = id => {
-		deleteMockies(id).then(response => {
-			console.log(response);
+		deleteMockies(id).then(() => {
 			fetchData();
 		});
 	};
