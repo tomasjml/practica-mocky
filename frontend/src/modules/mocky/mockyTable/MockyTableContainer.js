@@ -1,21 +1,32 @@
 import { useState, useEffect } from "react";
 import MockyTableComponent from "./MockyTableComponent";
-import { fetchMockies } from "../service";
+import { fetchMockies, deleteMockies } from "../service";
 
 const MockyTableContainer = () => {
 	const [mockies, setMockies] = useState([]);
 
-	useEffect(() => {
+	const fetchData = () => {
 		fetchMockies("admin")
 			.then(data => {
 				setMockies(data);
 			})
 			.then(() => console.log(mockies));
+	};
+
+	useEffect(() => {
+		fetchData();
 	}, []);
+
+	const onDelete = id => {
+		deleteMockies(id).then(response => {
+			console.log(response);
+			fetchData();
+		});
+	};
 
 	return (
 		<>
-			<MockyTableComponent mockies={mockies} />
+			<MockyTableComponent mockies={mockies} onDelete={onDelete} fetchData={fetchData} />
 		</>
 	);
 };

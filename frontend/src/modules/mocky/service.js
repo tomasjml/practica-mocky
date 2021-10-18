@@ -15,3 +15,14 @@ export const fetchMockies = filters => {
 			return Promise.reject(error);
 		});
 };
+
+export const deleteMockies = filters => {
+	const route = path.deleteMocky(filters);
+	return restClient(route, "DELETE")
+		.then(function (response) {
+			return Promise.resolve(response);
+		})
+		.catch(error => {
+			return Promise.reject(error);
+		});
+};

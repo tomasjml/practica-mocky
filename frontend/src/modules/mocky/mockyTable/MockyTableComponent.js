@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 // import { appConfig } from "../config/global";
 import ModalButton from "../../core/components/ModalButton/ModalButton";
 
-const MockyTableComponent = ({ t, mockies }) => {
+const MockyTableComponent = ({ t, mockies, onDelete }) => {
 	return (
 		<>
 			<div className="card m-5 p-4">
@@ -78,7 +78,9 @@ const MockyTableComponent = ({ t, mockies }) => {
 															textModalBody={`${t("tableDeleteModalBody")} ${mocky.id}`}
 															textCloseButton={t("tableDeleteModalClose")}
 															textActionButton={t("tableDeleteModalAction")}
-															onSave={() => console.log("Deleted: ", mocky.id)}
+															onSave={() => {
+																onDelete(mocky.id);
+															}}
 														/>
 													</span>
 												</td>
@@ -104,7 +106,8 @@ const MockyTableComponent = ({ t, mockies }) => {
 
 MockyTableComponent.propTypes = {
 	t: PropTypes.any,
-	mockies: PropTypes.array
+	mockies: PropTypes.array,
+	onDelete: PropTypes.func
 };
 
 export default withTranslation()(MockyTableComponent);

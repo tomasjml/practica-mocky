@@ -31,5 +31,6 @@ export const userPath = {
 };
 
 export const mockyPath = {
-	fetchMockies: username => `${host}/mock/all/${username}`
+	fetchMockies: username => `${host}/mock/all/${username}`,
+	deleteMocky: id => `${host}/mock/${id}`
 };
