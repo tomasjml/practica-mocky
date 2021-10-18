@@ -17,7 +17,6 @@ export const restClient = (route, method, data = null) => {
 				/*console.log(error.response.data);
 				console.log(error.response.status);
 				console.log(error.response.headers);*/
-
 				return Promise.reject(error.response.data);
 				//return error.response;
 			} else if (error.request) {
@@ -39,23 +38,32 @@ export const restClient = (route, method, data = null) => {
 		});
 };
 
-const getHeaders = credentials => {
-	const token = localStorage.getItem("token");
+const getHeaders = () => {
+	//const token = localStorage.getItem("token");
 
-	if (token !== null && token !== undefined) {
-		return {
-			"Content-Type": "application/json",
-			Accept: "application/json",
-			"X-API-AUTH-REQUEST": false,
-			"X-API-TOKEN": token
-		};
-	} else {
-		return {
-			"X-API-AUTH-REQUEST": true,
-			"X-API-USER": credentials ? credentials.email : "",
-			"X-API-PASS": credentials ? credentials.password : ""
-		};
-	}
+	return {
+		"Content-Type": "application/json",
+		"X-API-AUTH-REQUEST": false,
+		"Access-Control-Allow-Origin": "*",
+		"Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token",
+		"Access-Control-Allow-Methods": "GET, POST, PATCH, PUT, DELETE, OPTIONS"
+		//"X-API-TOKEN": token
+	};
+	// To enable this part, credentials must be added as parameter
+	// if (token !== null && token !== undefined) {
+	// 	return {
+	// 		"Content-Type": "application/json",
+	// 		Accept: "application/json",
+	// 		"X-API-AUTH-REQUEST": false,
+	// 		"X-API-TOKEN": token
+	// 	};
+	// } else {
+	// 	return {
+	// 		"X-API-AUTH-REQUEST": true,
+	// 		"X-API-USER": credentials ? credentials.email : "",
+	// 		"X-API-PASS": credentials ? credentials.password : ""
+	// 	};
+	// }
 };
 
 /* Unknow error */

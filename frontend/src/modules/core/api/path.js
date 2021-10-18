@@ -29,3 +29,7 @@ export const userPath = {
 	activateInactivateUser: id => `${host}/user/activateInactivateUser/${id}`,
 	fetchUsers: () => `${host}/user/all`
 };
+
+export const mockyPath = {
+	fetchMockies: username => `${host}/mock/all/${username}`
+};
