@@ -45,7 +45,7 @@ const MockyTableComponent = ({ t, mockies, onDelete }) => {
 														<span className="badge text-black">{t("tableNoContent")}</span>
 													) : (
 														<pre>
-															<code className="d-inline-block">{mocky.content}</code>
+															<code className="d-inline-block">{mocky.body}</code>
 														</pre>
 													)}
 												</td>

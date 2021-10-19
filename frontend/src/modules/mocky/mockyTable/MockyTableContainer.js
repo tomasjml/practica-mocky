@@ -23,7 +23,7 @@ const MockyTableContainer = () => {
 
 	return (
 		<>
-			<MockyTableComponent mockies={mockies} onDelete={onDelete} fetchData={fetchData} />
+			<MockyTableComponent mockies={mockies} onDelete={onDelete} />
 		</>
 	);
 };

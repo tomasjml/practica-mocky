@@ -7,13 +7,12 @@ import { withTranslation } from "react-i18next";
 
 import { useForm } from "react-hook-form";
 
-const MockyFormComponent = ({ t }) => {
+const MockyFormComponent = ({ t, onSave }) => {
 	const {
 		handleSubmit,
 		register,
 		formState: { errors }
 	} = useForm();
-	const onSubmit = values => console.log(values);
 
 	return (
 		<>
@@ -31,7 +30,49 @@ const MockyFormComponent = ({ t }) => {
 							<div className="card-subtitle mb-2 text-center text-muted">{t("anyRequest")}</div>
 						</div>
 					</div>
-					<form onSubmit={handleSubmit(onSubmit)}>
+					<form onSubmit={handleSubmit(onSave)}>
+						<div className="row g-2">
+							<div className="col col-md-6">
+								<div className="mb-3">
+									<label htmlFor="textName" className="form-label">
+										{t("formName")}
+									</label>
+									<input
+										id="textName"
+										type="text"
+										className="form-control"
+										aria-describedby="textNameHelp"
+										{...register("name", {
+											required: true,
+											maxLength: 32
+										})}
+									/>
+									<div id="textNameHelp" className="form-text text-primary">
+										{t("formNameHelp")}
+									</div>
+								</div>
+							</div>
+							<div className="col col-md-6">
+								<div className="mb-3">
+									<label htmlFor="textDescription" className="form-label">
+										{t("formDescription")}
+									</label>
+									<input
+										id="textDescription"
+										type="text"
+										className="form-control"
+										aria-describedby="textDescriptionHelp"
+										{...register("description", {
+											required: true,
+											maxLength: 32
+										})}
+									/>
+									<div id="textDescriptionHelp" className="form-text text-primary">
+										{t("formDescriptionHelp")}
+									</div>
+								</div>
+							</div>
+						</div>
 						<div className="row g-2">
 							<div className="col col-md-6 mb-3">
 								<label className="form-label" htmlFor="selectStatus">
@@ -70,6 +111,26 @@ const MockyFormComponent = ({ t }) => {
 								</select>
 								{errors.status && errors.status.message}
 								<div className="form-text text-primary">{t("formHTTPStatusHelp")}</div>
+							</div>
+							<div className="col col-md-6 mb-3">
+								<label className="form-label" htmlFor="selectMethod">
+									{t("formMethod")}
+								</label>
+								<select
+									id="selectMethod"
+									className="form-select"
+									aria-label="Default select example"
+									{...register("method", {
+										required: true
+									})}
+								>
+									<option value="GET">GET</option>
+									<option value="POST">POST</option>
+									<option value="PUT">PUT</option>
+									<option value="DELETE">DELETE</option>
+									<option value="OPTIONS">OPTIONS</option>
+								</select>
+								<div className="form-text text-primary">{t("formMethodHelp")}</div>
 							</div>
 						</div>
 						<div className="row g-2">
@@ -191,7 +252,8 @@ const MockyFormComponent = ({ t }) => {
 };
 
 MockyFormComponent.propTypes = {
-	t: PropTypes.any
+	t: PropTypes.any,
+	onSave: PropTypes.func
 };
 
 export default withTranslation()(MockyFormComponent);

@@ -17,8 +17,19 @@ export const fetchMockies = filters => {
 };
 
 export const deleteMockies = filters => {
-	const route = path.deleteMocky(filters);
+	const route = path.deleteMock(filters);
 	return restClient(route, "DELETE")
+		.then(function (response) {
+			return Promise.resolve(response);
+		})
+		.catch(error => {
+			return Promise.reject(error);
+		});
+};
+
+export const createMocky = filters => {
+	const route = path.createMock(filters);
+	return restClient(route, "POST")
 		.then(function (response) {
 			return Promise.resolve(response);
 		})
