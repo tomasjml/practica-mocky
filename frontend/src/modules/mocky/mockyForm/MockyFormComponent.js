@@ -86,7 +86,7 @@ const MockyFormComponent = ({ t, onSave }) => {
 										required: true,
 										valueAsNumber: true
 									})}
-									aria-label="Default select example"
+									aria-label="Method for HTTP request"
 								>
 									<option disabled value>
 										{" "}
@@ -212,7 +212,7 @@ const MockyFormComponent = ({ t, onSave }) => {
 											"  }\n" +
 											'}"'
 										}
-										{...register("responseBody", {
+										{...register("body", {
 											required: true
 										})}
 									/>

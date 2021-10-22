@@ -29,7 +29,7 @@ export const deleteMockies = filters => {
 
 export const createMocky = filters => {
 	const route = path.createMock(filters);
-	return restClient(route, "POST")
+	return restClient(route, "POST", filters)
 		.then(function (response) {
 			return Promise.resolve(response);
 		})
