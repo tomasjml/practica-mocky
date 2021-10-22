@@ -20,9 +20,8 @@ const MockyFormContainer = () => {
 				username: "admin"
 			}
 		};
-		console.log("Mocky sent in post: ", mocky);
-		const response = await createMocky(mocky);
-		console.log(response);
+		// const response = For message of warning or success
+		await createMocky(mocky);
 	};
 
 	return (
