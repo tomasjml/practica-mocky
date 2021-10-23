@@ -33,18 +33,15 @@ public class MockResponse implements Serializable {
     @NonNull @Getter @Setter
     private String method;
 
-    //
     @NonNull @Getter @Setter
     private String headers;
 
     @NonNull @Getter @Setter
     private int statusCode;
 
-    //
     @NonNull @Getter @Setter
     private String contentType;
 
-    //
     @NonNull @Getter @Setter
     private String body;
 
@@ -62,6 +59,9 @@ public class MockResponse implements Serializable {
 
     @Getter @Setter
     private LocalDateTime expirationDate;
+
+    @Getter @Setter
+    private String charset;
 
     @NonNull @Getter @Setter
     @ManyToOne
