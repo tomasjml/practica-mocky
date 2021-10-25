@@ -16,10 +16,12 @@ public class Security extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserDetailsService userDetailsService;
 
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         //Clase para encriptar contraseña
-        BCryptPasswordEncoder bCryptPasswordEncoder=new BCryptPasswordEncoder();
 
         //
         auth.userDetailsService(userDetailsService)

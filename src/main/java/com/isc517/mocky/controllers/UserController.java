@@ -25,12 +25,12 @@ public class UserController {
     @Value("${token_jwt}")
     private String secretKey;
 
-    @GetMapping("users")
+    @GetMapping("/users")
     public ResponseEntity<String> getAllUsers(){
         return new ResponseEntity<String>(gson.toJson(userService.getAllUsers()), HttpStatus.OK);
     }
 
-    @PostMapping("auth")
+    @PostMapping("/auth")
     public ResponseEntity<String> auth(@RequestParam("username") String username, @RequestParam("password") String password){
         String token = "";
         Optional<User> user = userService.confirmUser(username, password);

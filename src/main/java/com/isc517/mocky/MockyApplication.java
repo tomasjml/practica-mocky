@@ -9,6 +9,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -20,6 +21,12 @@ public class MockyApplication {
     public static void main(String[] args) {
         SpringApplication.run(MockyApplication.class, args);
     }
+
+    @Bean
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
 
     @Bean
     public CommandLineRunner loadInitialData(UserService userService, MockResponseService mockService){

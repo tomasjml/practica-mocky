@@ -32,7 +32,7 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
             return;
         }
 
-        if(request.getServletPath().startsWith("/api/")){
+        if(request.getServletPath().startsWith("/api/") || request.getServletPath().startsWith("/mock/") ){
             if (existJWTToken(request, response)) {
                 Claims claims = validateToken(request);
                 if (claims.get("authorities") != null) {
@@ -51,21 +51,14 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 
-    /**
-     *
-     * @param request
-     * @return
-     */
+
     private Claims validateToken(HttpServletRequest request) {
         System.out.println("El SECRET es: "+SECRET);
         String jwtToken = request.getHeader(HEADER).replace(PREFIX, "");
         return Jwts.parser().setSigningKey(SECRET.getBytes()).parseClaimsJws(jwtToken).getBody();
     }
 
-    /**
-     *
-     * @param claims
-     */
+
     private void setUpSpringAuthentication(Claims claims) {
 
         List authorities = (List) claims.get("roles");
@@ -77,12 +70,7 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
 
     }
 
-    /**
-     *
-     * @param request
-     * @param res
-     * @return
-     */
+
     private boolean existJWTToken(HttpServletRequest request, HttpServletResponse res) {
         String authenticationHeader = request.getHeader(HEADER);
         if(authenticationHeader == null || !authenticationHeader.startsWith(PREFIX))
