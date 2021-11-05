@@ -1,0 +1,41 @@
+
+version: '3.8'
+
+services:
+  mysql-db:
+    image: mysql:8.0.27
+
+    env_file:
+      - .env
+    environment:
+      - MYSQL_ROOT_PASSWORD=$DB_PASSWORD
+      - MYSQL_PASSWORD=$DB_PASSWORD
+      - MYSQL_USER=$DB_USER
+      - MYSQL_DATABASE=$DB_NAME
+    volumes:
+      - db_volume:/var/lib/mysql
+    networks:
+      - red-app
+
+  phpmyadmin:
+    image: phpmyadmin:5.1.1
+    env_file:
+      - .env
+    ports:
+      - ${PUERTO_PHPMYADMIN}:80
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=mysql-db
+      - PMA_USER=root
+      - PMA_PASSWORD=$DB_PASSWORD
+      - PMA_PORT=$DB_PORT
+    networks:
+      - red-app
+    depends_on:
+      - mysql-db
+
+networks:
+  red-app:
+
+volumes:
+  db_volume:
