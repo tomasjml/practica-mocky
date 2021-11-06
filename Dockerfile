@@ -3,14 +3,14 @@
 
 # Probando el concepto de Multi-stage.
 # Instalando Gradle para compilar al aplicación y luego lo necesario a una imagen completa.
-FROM gradle:7.2.0-jdk11 AS build
+FROM gradle:7.2.0-jdk11-alpine AS build
 COPY --chown=gradle:gradle . /home/gradle/src
 WORKDIR /home/gradle/src
 RUN gradle bootJar --no-daemon
 
 # El comando FROM indica la imagen base.
 # openjdk:8-jdk-alpine es una imagen de Java 8 muy ligera.
-FROM openjdk:11.0.12-jre-slim-buster
+FROM openjdk:11.0.13-jre-slim-buster
 
 # Quien mantiene la versión.
 LABEL maintainer="Robert Dominguez <20180840@ce.pucmm.edu.do>"

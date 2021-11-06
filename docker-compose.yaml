@@ -17,6 +17,21 @@ services:
     depends_on:
       - mysql-db
 
+  mocky-frontend:
+    build: ./frontend
+    image: mocky_front:1.0
+
+    env_file:
+      - .env
+    environment:
+      - NOMBRE_APP=$AMBIENTE
+    ports:
+      - ${PUERTO_FRONT}:80
+    networks:
+      - red-app
+    depends_on:
+      - mocky-app
+
   mysql-db:
     image: mysql:8.0.27
 
@@ -34,7 +49,7 @@ services:
       - red-app
 
   phpmyadmin:
-    image: phpmyadmin:5.1.1
+    image: phpmyadmin:5.1.1-fpm-alpine
     env_file:
       - .env
     ports:
