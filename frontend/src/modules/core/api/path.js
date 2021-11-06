@@ -18,17 +18,9 @@ export let serializeURL = function (obj, prefix) {
 	return str.join("&");
 };
 
-export const loginPath = {
-	login: () => `${host}/login`
+export const authPath = {
+	authUser: () => `${host}/auth/login`
 };
-
-// export const userPath = {
-// 	createUser: () => `${host}/public/user/`,
-// 	updateUser: id => `${host}/user/update/${id}`,
-// 	changeUserPassword: id => `${host}/user/resetPassword/${id}`,
-// 	activateInactivateUser: id => `${host}/user/activateInactivateUser/${id}`,
-// 	fetchUsers: () => `${host}/user/all`
-// };
 
 export const mockyPath = {
 	fetchMockies: username => `${host}/mock/all/${username}`,
