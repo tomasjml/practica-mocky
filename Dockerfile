@@ -3,7 +3,7 @@
 
 # Probando el concepto de Multi-stage.
 # Instalando Gradle para compilar al aplicación y luego lo necesario a una imagen completa.
-FROM gradle:7.2.0-jdk11-alpine AS build
+FROM gradle:7.2.0-jdk11 AS build
 COPY --chown=gradle:gradle . /home/gradle/src
 WORKDIR /home/gradle/src
 RUN gradle bootJar --no-daemon
