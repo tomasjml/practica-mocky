@@ -1,0 +1,17 @@
+server.port=8082
+
+#Información para la conexión de la base de datos.
+spring.datasource.url=
+spring.datasource.username=
+spring.datasource.password=
+spring.datasource.driver-class-name=org.h2.Driver
+spring.jpa.hibernate.ddl-auto=create-drop
+spring.jpa.show-sql=true
+
+#Configuración para habilitar la consola de H2
+spring.h2.console.enabled=true
+spring.h2.console.path=/dbconsole
+
+# Llave Secreta para la generación del Token.
+token_jwt=
+

@@ -24,27 +24,31 @@ public class MockController {
     private MockResponseService mockService;
 
     // ENTITY CRUD
-
+    @CrossOrigin
     @GetMapping("/all/{user}")
     public List<MockResponse> getAllMocksByUsername(@PathVariable("user") String username){
         return mockService.getAllMocksByUser(username);
     }
 
+    @CrossOrigin
     @GetMapping("/{id}")
     public MockResponse getMockEntity(@PathVariable("id") String id){
         return mockService.getMockEntity(id);
     }
 
-
+    @CrossOrigin
     @PostMapping("/add")
     public MockResponse postMockEntity(@RequestBody MockResponse newMock){
         return mockService.createMock(newMock);
     }
 
+    @CrossOrigin
     @PutMapping("/update")
     public ResponseEntity updateMockEntity(@RequestBody MockResponse newMock){
         return mockService.updateMock(newMock);
     }
+
+    @CrossOrigin
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteMockEntity(@PathVariable("id") String id){
         return mockService.deleteMock(id);
@@ -52,7 +56,7 @@ public class MockController {
 
 
     // MOCKS REQUESTS
-
+    @CrossOrigin
     @GetMapping ("/response/{id}")
     public ResponseEntity getRequest(@PathVariable("id") String id, HttpServletRequest request) {
 
@@ -63,6 +67,7 @@ public class MockController {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Mock Not Found");
     }
 
+    @CrossOrigin
     @PostMapping("/response/{id}")
     public ResponseEntity postRequest(@PathVariable("id") String id, HttpServletRequest request){
         String method = mockService.getMethodById(id);
@@ -72,6 +77,7 @@ public class MockController {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Mock Not Found");
     }
 
+    @CrossOrigin
     @DeleteMapping(value ="/response/{id}")
     public ResponseEntity deleteRequest(@PathVariable("id") String id, HttpServletRequest request){
         String method = mockService.getMethodById(id);
@@ -81,6 +87,7 @@ public class MockController {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Mock Not Found");
     }
 
+    @CrossOrigin
     @PutMapping(value ="/response/{id}")
     public ResponseEntity putRequest(@PathVariable("id") String id, HttpServletRequest request){
         String method = mockService.getMethodById(id);
@@ -90,6 +97,7 @@ public class MockController {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Mock Not Found");
     }
 
+    @CrossOrigin
     @RequestMapping(value ="/response/{id}", method = RequestMethod.OPTIONS)
     public ResponseEntity optionsRequest(@PathVariable("id") String id, HttpServletRequest request){
         String method = mockService.getMethodById(id);
