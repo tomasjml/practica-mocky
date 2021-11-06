@@ -2,16 +2,32 @@
 version: '3.8'
 
 services:
+  mocky-app:
+    build: .
+    image: mockyapp_image:1.0
+
+    env_file:
+      - .env
+    environment:
+      - NOMBRE_APP=$AMBIENTE
+    ports:
+      - ${PUERTO_APP}:8080
+    networks:
+      - red-app
+    depends_on:
+      - mysql-db
+
   mysql-db:
     image: mysql:8.0.27
 
     env_file:
       - .env
+
     environment:
-      - MYSQL_ROOT_PASSWORD=$DB_PASSWORD
       - MYSQL_PASSWORD=$DB_PASSWORD
       - MYSQL_USER=$DB_USER
       - MYSQL_DATABASE=$DB_NAME
+      - MYSQL_ROOT_PASSWORD=$DB_PASSWORD
     volumes:
       - db_volume:/var/lib/mysql
     networks:
@@ -25,7 +41,7 @@ services:
       - ${PUERTO_PHPMYADMIN}:80
     environment:
       - PMA_ARBITRARY=1
-      - PMA_HOST=mysql-db
+      - PMA_HOST=$DB_HOST
       - PMA_USER=root
       - PMA_PASSWORD=$DB_PASSWORD
       - PMA_PORT=$DB_PORT
