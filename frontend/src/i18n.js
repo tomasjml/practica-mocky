@@ -4,6 +4,9 @@ import { initReactI18next } from "react-i18next";
 // the translations
 // (tip move them in a JSON file and import them,
 // or even better, manage them separated from your code: https://react.i18next.com/guides/multiple-translation-files)
+/**
+ * @type {i18n.Resource}
+ */
 const resources = {
 	en: {
 		translation: {
@@ -12,6 +15,11 @@ const resources = {
 			designMocks: "Design your mock",
 			manageMocks: "Manage my mocks",
 			newMock: "New Mock",
+			authLogout: "Log out",
+			logOutModalTitle: "¿Are you sure you wanna log out?",
+			logOutModalBody: "User being logged out: ",
+			logOutModalCloseButton: "Cancel",
+			logOutModalLogoutButton: "Log out",
 			formName: "Name",
 			formNameHelp: "Assign a name for the Endpoint",
 			formDescription: "Description",
@@ -50,6 +58,11 @@ const resources = {
 			designMocks: "Diseña tu mock",
 			manageMocks: "Manejar mis mocks",
 			newMock: "Nuevo Mock",
+			authLogout: "Cerrar sesión",
+			logOutModalTitle: "¿Está seguro que quiere cerrar sesión?",
+			logOutModalBody: "Usuario para cerrar sesión: ",
+			logOutModalCloseButton: "Cancelar",
+			logOutModalLogoutButton: "Cerrar sesión",
 			formName: "Nombre",
 			formNameHelp: "Asigna un nombre para el Endpoint",
 			formDescription: "Descripción",

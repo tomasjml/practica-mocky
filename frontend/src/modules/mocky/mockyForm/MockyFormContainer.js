@@ -1,5 +1,7 @@
 import MockyFormComponent from "./MockyFormComponent";
 import { createMocky } from "../service";
+import NavBarContainer from "../../NavBar/NavBarContainer";
+import { getUsername } from "../../auth/service";
 
 const MockyFormContainer = () => {
 	const onSave = async data => {
@@ -17,7 +19,7 @@ const MockyFormContainer = () => {
 			creationDate: new Date().toISOString(),
 			expirationDate: new Date().toISOString(),
 			user: {
-				username: "admin"
+				username: getUsername()
 			}
 		};
 		// const response = For message of warning or success
@@ -26,6 +28,7 @@ const MockyFormContainer = () => {
 
 	return (
 		<>
+			<NavBarContainer />
 			<MockyFormComponent onSave={onSave} />
 		</>
 	);

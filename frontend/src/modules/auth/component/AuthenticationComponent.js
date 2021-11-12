@@ -5,11 +5,7 @@ import { useForm } from "react-hook-form";
 import PropTypes from "prop-types";
 
 const AuthenticationComponent = ({ onSave }) => {
-	const {
-		handleSubmit,
-		register
-		// formState: { errors }
-	} = useForm();
+	const { handleSubmit, register } = useForm();
 
 	return (
 		<div className="container container-fluid min-vh-100">
@@ -39,16 +35,16 @@ const AuthenticationComponent = ({ onSave }) => {
 										<div className="col">
 											<div className="form-floating">
 												<input
-													type="text"
+													type="email"
 													className="form-control"
-													id="textFieldUsername"
+													id="textFieldEmail"
 													placeholder="User: johndoe"
 													{...register("username", {
 														required: "This is required"
 													})}
 													required
 												/>
-												<label htmlFor="textFieldPassword">Username</label>
+												<label htmlFor="textFieldPassword">Email</label>
 											</div>
 											<div className="form-floating">
 												<input
@@ -64,18 +60,7 @@ const AuthenticationComponent = ({ onSave }) => {
 											</div>
 										</div>
 									</div>
-
-									<div className="checkbox mb-3">
-										<label htmlFor="checkBoxRememberMe">
-											<input
-												id="checkBoxRememberMe"
-												type="checkbox"
-												value={e => e.target}
-												{...register("rememberMe", {})}
-											/>
-											Remember Me
-										</label>
-									</div>
+									<br />
 									<button className="w-100 btn btn-lg btn-primary" type="submit">
 										Sign in
 									</button>
@@ -91,7 +76,7 @@ const AuthenticationComponent = ({ onSave }) => {
 };
 
 AuthenticationComponent.propTypes = {
-	onSave: PropTypes.func
+	onSave: PropTypes.func.isRequired
 };
 
 export default AuthenticationComponent;
