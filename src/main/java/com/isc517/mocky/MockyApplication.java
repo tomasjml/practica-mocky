@@ -36,15 +36,7 @@ public class MockyApplication {
                     Arrays.asList()
             );
             userService.createUser(newUser);
-            User newUser2 = new User(
-                    "jtml.mass@gmail.com",
-                    "jtmlmass",
-                    "Tomas",
-                    Arrays.asList("ROLE_ADMIN"),
-                    true,
-                    Arrays.asList()
-            );
-            userService.createUser(newUser2);
+
             mockService.createMock(new MockResponse(
                     "",
                     "",
@@ -61,6 +53,28 @@ public class MockyApplication {
                     "UTF-8",
                     newUser
             ));
+
+            User newUser2 = new User(
+                    "jtml.mass@gmail.com",
+                    "jtmlmass",
+                    "Tomas",
+                    Arrays.asList("ROLE_ADMIN"),
+                    true,
+                    Arrays.asList()
+            );
+            userService.createUser(newUser2);
+
+            User newUser3 = new User(
+                    "test@gmail.com",
+                    "test",
+                    "Test",
+                    Arrays.asList("ROLE_ADMIN"),
+                    true,
+                    Arrays.asList()
+            );
+            userService.createUser(newUser3);
+
+
 
             System.out.println("Done initializing Data - ");
         };
