@@ -1,10 +1,6 @@
 import { authPath as path } from "../core/api/path";
 import { restClient } from "../core/api/restClient";
 
-export const userConstants = {
-	EMPTY_VALUE: ""
-};
-
 /**
  * @description Service function for authentication
  * @param {string} username
@@ -46,6 +42,6 @@ export const setAuthInformation = (username, token) => {
  * @param {string} token
  */
 export const logOut = () => {
-	localStorage.setItem("username", userConstants.EMPTY_VALUE);
+	localStorage.removeItem("username");
 	localStorage.removeItem("token");
 };

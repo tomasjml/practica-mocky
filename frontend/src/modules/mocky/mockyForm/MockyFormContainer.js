@@ -4,6 +4,9 @@ import NavBarContainer from "../../NavBar/NavBarContainer";
 import { getUsername } from "../../auth/service";
 
 const MockyFormContainer = () => {
+	/**
+	 * @type {object} data from react-hook-form
+	 */
 	const onSave = async data => {
 		const mocky = {
 			id: "",
@@ -22,14 +25,21 @@ const MockyFormContainer = () => {
 				username: getUsername()
 			}
 		};
-		// const response = For message of warning or success
-		await createMocky(mocky);
+		const response = await createMocky(mocky);
+		if (response.statusCode >= 200 || response.statusCode < 300) {
+			await alert("Mocky created successfully");
+			window.location.href = "/table";
+		} else {
+			alert("Error creating mocky");
+			console.error(response);
+		}
 	};
 
 	return (
 		<>
 			<NavBarContainer />
 			<MockyFormComponent onSave={onSave} />
+			<br />
 		</>
 	);
 };
