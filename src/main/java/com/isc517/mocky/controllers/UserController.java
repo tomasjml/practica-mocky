@@ -46,16 +46,23 @@ public class UserController {
     }
 
     @CrossOrigin
-    @PostMapping(value = "/login", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseEntity<String> authenticate(@RequestBody Map<String, String> payload){
         String token = "";
         System.out.println("Payload value: " + payload);
         Optional<User> user = userService.confirmUser(payload.get("username"), payload.get("password"));
+        System.out.println("User: " + user);
         if(user.isEmpty()){
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
+
         token = generateToken(user.get());
-        return new ResponseEntity<>(token, HttpStatus.OK);
+
+        // JSONObject with the token and the payload username
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("token", token);
+        jsonObject.addProperty("username", user.get().getUsername());
+        return new ResponseEntity<>(gson.toJson(jsonObject), HttpStatus.OK);
     }
 
     /**
@@ -75,6 +82,6 @@ public class UserController {
                 .signWith(SignatureAlgorithm.HS512,
                         secretKey.getBytes()).compact();
 
-        return "Bearer " + token;
+        return token;
     }
 }

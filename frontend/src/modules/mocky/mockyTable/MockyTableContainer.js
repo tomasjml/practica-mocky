@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
 import MockyTableComponent from "./MockyTableComponent";
 import { fetchMockies, deleteMockies } from "../service";
+import NavBarContainer from "../../NavBar/NavBarContainer";
+import { getUsername } from "../../auth/service";
 
 const MockyTableContainer = () => {
 	const [mockies, setMockies] = useState([]);
 
 	const fetchData = () => {
-		fetchMockies("admin").then(data => {
+		fetchMockies(getUsername()).then(data => {
 			setMockies(data);
 		});
 	};
@@ -23,6 +25,7 @@ const MockyTableContainer = () => {
 
 	return (
 		<>
+			<NavBarContainer />
 			<MockyTableComponent mockies={mockies} onDelete={onDelete} />
 		</>
 	);

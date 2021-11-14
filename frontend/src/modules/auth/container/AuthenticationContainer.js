@@ -1,19 +1,24 @@
-import React, { useState } from "react";
 import AuthenticationComponent from "../component/AuthenticationComponent";
-import { authUser as authenticateUser } from "../service";
-
+import { authUser as authenticateUser, setAuthInformation } from "../service";
+/**
+ * @function AuthenticationContainer
+ * @description Container for Authentication Component
+ * @returns {object} Authentication Component
+ */
 const AuthenticationContainer = () => {
-	const [token, setToken] = useState("");
-	const authUser = async (username, password) => {
-		await authenticateUser({ username: username, password: password }).then(data => {
-			setToken(data);
-			console.log(data);
-			console.log(token);
-		});
-	};
-
-	const onSave = data => {
-		authUser(data.username, data.password);
+	/**
+	 * @function onSave
+	 * @description Authenticate user using the data coming from react-hook-form
+	 * @param {object} data data from react-hook-form
+	 */
+	const onSave = async data => {
+		try {
+			const response = await authenticateUser({ username: data.username, password: data.password });
+			await setAuthInformation(response.username, response.token);
+			window.location.href = "/form";
+		} catch (err) {
+			console.log(err);
+		}
 	};
 
 	return (

@@ -74,7 +74,7 @@ const MockyTableComponent = ({ t, mockies, onDelete }) => {
 															classesCloseButton={"btn btn-secondary"}
 															classesActionButton={"btn btn-danger"}
 															styleButton={{ backgroundColor: "transparent" }}
-															textModalTitle={t("tableDeleteModalTitle")}
+															textModalTitle={t("logOutModalTitle")}
 															textModalBody={`${t("tableDeleteModalBody")} ${mocky.id}`}
 															textCloseButton={t("tableDeleteModalClose")}
 															textActionButton={t("tableDeleteModalAction")}

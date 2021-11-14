@@ -34,6 +34,7 @@ export const createMocky = filters => {
 			return Promise.resolve(response);
 		})
 		.catch(error => {
+			console.error(error);
 			return Promise.reject(error);
 		});
 };
