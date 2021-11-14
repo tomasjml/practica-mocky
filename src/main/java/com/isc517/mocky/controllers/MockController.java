@@ -106,8 +106,4 @@ public class MockController {
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Mock Not Found");
     }
-
-
-
-
 }
