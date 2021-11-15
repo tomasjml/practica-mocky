@@ -5,7 +5,7 @@ COPY package.json ./
 COPY package-lock.json ./
 RUN npm install -g npm@8.1.3 && npm ci --silent && npm install react-scripts@3.4.1 -g --silent
 COPY . ./
-RUN npm run build
+RUN npm start
 
 # production environment
 FROM nginx:stable-alpine

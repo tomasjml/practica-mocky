@@ -7,6 +7,7 @@ import com.isc517.mocky.repositories.MockResponseRepository;
 import com.isc517.mocky.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.util.MultiValueMap;
@@ -22,6 +23,9 @@ public class MockResponseService {
     @Autowired
     private MockResponseRepository mockRepo;
     private static final Gson gson = new Gson();
+
+    @Value("${server.port}")
+    String PORT;
 
 
     public MockResponse getMockEntity(String id){
@@ -80,7 +84,10 @@ public class MockResponseService {
         }
 
             MockResponse mock2 = mockRepo.save(newMock);
-        mock2.setRoute("http://localhost:8082/mock/response/" + mock2.getId());
+
+
+
+        mock2.setRoute("http://localhost:"+PORT+"/mock/response/" + mock2.getId());
         return mockRepo.save(mock2);
     }
 
