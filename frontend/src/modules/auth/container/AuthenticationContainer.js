@@ -1,6 +1,5 @@
 import AuthenticationComponent from "../component/AuthenticationComponent";
 import { authUser as authenticateUser, setAuthInformation } from "../service";
-import {Redirect} from "react-router-dom";
 /**
  * @function AuthenticationContainer
  * @description Container for Authentication Component
@@ -16,7 +15,7 @@ const AuthenticationContainer = () => {
 		try {
 			const response = await authenticateUser({ username: data.username, password: data.password });
 			await setAuthInformation(response.username, response.token);
-			return <Redirect to="/form"/>;
+			window.location.href = "/form";
 		} catch (err) {
 			console.log(err);
 		}

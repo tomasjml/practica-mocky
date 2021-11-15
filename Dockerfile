@@ -14,6 +14,7 @@ FROM openjdk:11.0.13-jre-slim-buster
 
 # Quien mantiene la versión.
 LABEL maintainer="Robert Dominguez <20180840@ce.pucmm.edu.do>"
+LABEL maintainer="José Molina <20141130@ce.pucmm.edu.do>"
 # Indicando variable de ambiente para pasar el nombre
 # de la base de datos.
 ENV NOMBRE_APP = 'mocky-clone-app'

@@ -2,7 +2,7 @@ import Logo from "../../logo-dark.png";
 // the hoc
 import { withTranslation } from "react-i18next";
 import PropTypes from "prop-types";
-import {Redirect, useLocation} from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { getUsername, logOut } from "../auth/service";
 import ModalButton from "../core/components/ModalButton/ModalButton";
 
@@ -80,7 +80,7 @@ const NavbarComponent = ({ t }) => {
 								onSave={() => {
 									logOut();
 									//Redirect to auth page
-									return <Redirect to="/auth"/>;
+									window.location.href = "/auth";
 								}}
 							/>
 						</div>

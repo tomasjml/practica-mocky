@@ -2,7 +2,6 @@ import MockyFormComponent from "./MockyFormComponent";
 import { createMocky } from "../service";
 import NavBarContainer from "../../NavBar/NavBarContainer";
 import { getUsername } from "../../auth/service";
-import {Redirect} from "react-router-dom";
 
 const MockyFormContainer = () => {
 	/**
@@ -29,7 +28,7 @@ const MockyFormContainer = () => {
 		const response = await createMocky(mocky);
 		if (response.statusCode >= 200 || response.statusCode < 300) {
 			await alert("Mocky created successfully");
-			return <Redirect to="/table"/>;
+			window.location.href = "/table";
 		} else {
 			alert("Error creating mocky");
 			console.error(response);
