@@ -2,8 +2,8 @@ version: '3.8'
 
 services:
   mocky-app:
-    build: .
-    image: mockyapp_image:1.0
+    #build: .
+    image: robdom01/mocky:1.0
 
     env_file:
       - .env
@@ -17,8 +17,8 @@ services:
       - mysql-db
 
   mocky-frontend:
-    build: ./frontend
-    image: mocky_front:1.0
+    #build: ./frontend
+    image: robdom01/mocky_front:1.0
 
     env_file:
       - .env
