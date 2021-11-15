@@ -3,7 +3,7 @@ version: '3.8'
 services:
   mocky-app:
     #build: .
-    image: robdom01/mocky:1.0
+    image: robdom01/mocky:1.1
 
     env_file:
       - .env
