@@ -16,20 +16,20 @@ services:
     depends_on:
       - mysql-db
 
-  mocky-frontend:
-    build: ./frontend
-    image: mocky_front:1.0
-
-    env_file:
-      - .env
-    environment:
-      - NOMBRE_APP=$AMBIENTE
-    ports:
-      - ${PUERTO_FRONT}:80
-    networks:
-      - red-app
-    depends_on:
-      - mocky-app
+#  mocky-frontend:
+#    build: ./frontend
+#    image: mocky_front:1.0
+#
+#    env_file:
+#      - .env
+#    environment:
+#      - NOMBRE_APP=$AMBIENTE
+#    ports:
+#      - ${PUERTO_FRONT}:80
+#    networks:
+#      - red-app
+#    depends_on:
+#      - mocky-app
 
   mysql-db:
     image: mysql:8.0.27

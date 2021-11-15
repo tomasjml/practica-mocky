@@ -12,10 +12,7 @@ const PrivateRoute = ({ Component, ...rest }) => {
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
 
 	useEffect(() => {
-		console.log("Window location: ", window.location.pathname);
 		const username = getUsername();
-		console.log("Username: ", username);
-		console.log("Is logged in: ", isLoggedIn);
 		if (username) {
 			setIsLoggedIn(true);
 		} else {
