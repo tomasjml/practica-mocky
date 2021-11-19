@@ -1,38 +1,139 @@
 version: '3.8'
 
 services:
-  mocky-app:
+
+# HAProxy CONTAINER
+  running-haproxy:
+    #build: ./HAProxyConfig
+
+    image: robdom01/haproxy:1.0
+
+    container_name: "running-haproxy"
+
+    ports:
+      - "80:80"
+    networks:
+      - red-app
+    depends_on:
+      - mocky-frontend1
+
+#BACKEND CONTAINER
+  mocky-app1:
     #build: .
-    image: robdom01/mocky:1.1
+    image: robdom01/mocky:1.2
+
+    container_name: "mocky-app1"
 
     env_file:
       - .env
     environment:
       - NOMBRE_APP=$AMBIENTE
+      - PUERTO_APP=${PUERTO_APP1}
     ports:
-      - ${PUERTO_APP}:8080
+      - ${PUERTO_APP1}:${PUERTO_APP1}
+    networks:
+      - red-app
+    depends_on:
+      - mysql-db
+  mocky-app2:
+    #build: .
+    image: robdom01/mocky:1.2
+
+    container_name: "mocky-app2"
+
+    env_file:
+      - .env
+    environment:
+      - NOMBRE_APP=$AMBIENTE
+      - PUERTO_APP=${PUERTO_APP2}
+    ports:
+      - ${PUERTO_APP2}:${PUERTO_APP2}
     networks:
       - red-app
     depends_on:
       - mysql-db
 
-  mocky-frontend:
-    #build: ./frontend
-    image: robdom01/mocky_front:1.0
+  mocky-app3:
+    #build: .
+    image: robdom01/mocky:1.2
+
+    container_name: "mocky-app3"
 
     env_file:
       - .env
     environment:
       - NOMBRE_APP=$AMBIENTE
+      - PUERTO_APP=${PUERTO_APP3}
     ports:
-      - ${PUERTO_FRONT}:3000
+      - ${PUERTO_APP3}:${PUERTO_APP3}
     networks:
       - red-app
     depends_on:
-      - mocky-app
+      - mysql-db
 
+# FRONTEND CONTAINERS
+  mocky-frontend1:
+    #build: ./frontend
+    image: robdom01/mocky_front:1.0
+
+    container_name: "mocky-frontend1"
+
+    env_file:
+      - .env
+    environment:
+      - NOMBRE_APP=$AMBIENTE
+      - PORT=${PUERTO_FRONT1}
+      - API_PORT=${PUERTO_APP1}
+    ports:
+      - ${PUERTO_FRONT1}:${PUERTO_FRONT1}
+    networks:
+      - red-app
+    depends_on:
+      - mocky-app1
+
+  mocky-frontend2:
+    #build: ./frontend
+    image: robdom01/mocky_front:1.0
+
+    container_name: "mocky-frontend2"
+
+    env_file:
+      - .env
+    environment:
+      - NOMBRE_APP=$AMBIENTE
+      - PORT=${PUERTO_FRONT2}
+      - API_PORT=${PUERTO_APP2}
+    ports:
+      - ${PUERTO_FRONT2}:${PUERTO_FRONT2}
+    networks:
+      - red-app
+    depends_on:
+      - mocky-app2
+
+  mocky-frontend3:
+    #build: ./frontend
+    image: robdom01/mocky_front:1.0
+
+    container_name: "mocky-frontend3"
+
+    env_file:
+      - .env
+    environment:
+      - NOMBRE_APP=$AMBIENTE
+      - PORT=${PUERTO_FRONT3}
+      - API_PORT=${PUERTO_APP3}
+    ports:
+      - ${PUERTO_FRONT3}:${PUERTO_FRONT3}
+    networks:
+      - red-app
+    depends_on:
+      - mocky-app3
+
+# DB CONTAINERS
   mysql-db:
     image: mysql:8.0.27
+
+    container_name: "mysql-db"
 
     env_file:
       - .env
@@ -49,6 +150,9 @@ services:
 
   phpmyadmin:
     image: phpmyadmin:5.1.1
+
+    container_name: "phpmyadmin"
+
     env_file:
       - .env
     ports:

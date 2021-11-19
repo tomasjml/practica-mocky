@@ -24,8 +24,8 @@ public class MockResponseService {
     private MockResponseRepository mockRepo;
     private static final Gson gson = new Gson();
 
-    @Value("${server.port}")
-    String PORT;
+    @Value("${APP_HOST}")
+    String HOST;
 
 
     public MockResponse getMockEntity(String id){
@@ -87,7 +87,7 @@ public class MockResponseService {
 
 
 
-        mock2.setRoute("http://localhost:"+PORT+"/mock/response/" + mock2.getId());
+        mock2.setRoute("http://"+HOST+"/mock/response/" + mock2.getId());
         return mockRepo.save(mock2);
     }
 
