@@ -2,6 +2,7 @@ package com.isc517.mocky.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -28,22 +29,22 @@ public class Security extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        //permitiendo el acceso vía cors, crfs y los iframe.
-        http.cors().disable();
+        //permitiendo el acceso vía cors, crfs y los iframe.;
         http.csrf().disable();
+        http.cors().disable();
         http.headers().frameOptions().disable();
         //permitiendo el acceso.
         http
                 .authorizeRequests()
-                .antMatchers("/dbconsole/**", "/login").permitAll()
+                .antMatchers("/dbconsole/**").permitAll()
                 .antMatchers("/").authenticated()
-                //.anyRequest().authenticated()
                 .and()
                 .formLogin().permitAll()
                 .and()
                 .logout().permitAll()
                 .and()
-                .authorizeRequests().antMatchers("/api/**").permitAll()
+                .authorizeRequests()
+                .antMatchers("/api/**","/mock/**", "/auth/**").permitAll()
                 .and().addFilterBefore(new JWTAuthorizationFilter(), BasicAuthenticationFilter.class);
 
     }

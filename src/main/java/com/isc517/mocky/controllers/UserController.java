@@ -1,23 +1,28 @@
 package com.isc517.mocky.controllers;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.isc517.mocky.entities.User;
 import com.isc517.mocky.services.UserService;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.print.attribute.standard.Media;
+import javax.print.attribute.standard.MediaTray;
 import java.util.Date;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/")
+@RequestMapping("/auth")
 public class UserController {
     private final UserService userService;
     private static final Gson gson = new Gson();
@@ -25,20 +30,39 @@ public class UserController {
     @Value("${token_jwt}")
     private String secretKey;
 
-    @GetMapping("users")
-    public ResponseEntity<String> getAllUsers(){
-        return new ResponseEntity<String>(gson.toJson(userService.getAllUsers()), HttpStatus.OK);
+    @CrossOrigin
+    @GetMapping("/users")
+    public ResponseEntity<JsonArray> getAllUsers(){
+        JsonArray jsonUsers = null;
+        for(User user: userService.getAllUsers()){
+            JsonObject jsonUser = new JsonObject();
+            jsonUser.addProperty("username", user.getUsername());
+            jsonUser.addProperty("name", user.getName());
+            jsonUser.addProperty("isAdministrator", user.isAdministrator());
+            assert false;
+            jsonUsers.add(jsonUser);
+        }
+        return new ResponseEntity<JsonArray>(jsonUsers, HttpStatus.OK);
     }
 
-    @PostMapping("auth")
-    public ResponseEntity<String> auth(@RequestParam("username") String username, @RequestParam("password") String password){
+    @CrossOrigin
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public ResponseEntity<String> authenticate(@RequestBody Map<String, String> payload){
         String token = "";
-        Optional<User> user = userService.confirmUser(username, password);
+        System.out.println("Payload value: " + payload);
+        Optional<User> user = userService.confirmUser(payload.get("username"), payload.get("password"));
+        System.out.println("User: " + user);
         if(user.isEmpty()){
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
+
         token = generateToken(user.get());
-        return new ResponseEntity<>(token, HttpStatus.OK);
+
+        // JSONObject with the token and the payload username
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("token", token);
+        jsonObject.addProperty("username", user.get().getUsername());
+        return new ResponseEntity<>(gson.toJson(jsonObject), HttpStatus.OK);
     }
 
     /**
@@ -58,6 +82,6 @@ public class UserController {
                 .signWith(SignatureAlgorithm.HS512,
                         secretKey.getBytes()).compact();
 
-        return "Bearer " + token;
+        return token;
     }
 }
