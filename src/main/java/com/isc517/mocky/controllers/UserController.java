@@ -27,6 +27,9 @@ public class UserController {
     private final UserService userService;
     private static final Gson gson = new Gson();
 
+    @Value("server.port")
+    private String port;
+
     @Value("${token_jwt}")
     private String secretKey;
 
@@ -57,6 +60,8 @@ public class UserController {
         }
 
         token = generateToken(user.get());
+
+        System.out.println(port);
 
         // JSONObject with the token and the payload username
         JsonObject jsonObject = new JsonObject();
